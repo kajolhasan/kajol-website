@@ -1,147 +1,228 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kajol Hasan | Personal Page</title>
-    <style>
-        :root {
-            --bg-color: #fff;
-            --text-color: #333;
-            --primary-color: #6b4eae;
-            --accent-color: #e5e8f7;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Kajol Hasan | Personal Page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-        body.dark {
-            --bg-color: #1e1e2f;
-            --text-color: #e0e0e0;
-            --primary-color: #a48fe0;
-            --accent-color: #2c2c3a;
-        }
+    :root {
+      --bg-color: #ffffff;
+      --text-color: #333333;
+      --primary-color: #6b4eae;
+      --accent-color: #e5e8f7;
+    }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--accent-color);
-            color: var(--text-color);
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            transition: background 0.3s, color 0.3s;
-        }
+    body.dark {
+      --bg-color: #1e1e2f;
+      --text-color: #e0e0e0;
+      --primary-color: #a48fe0;
+      --accent-color: #2c2c3a;
+    }
 
-        .container {
-            width: 90%;
-            max-width: 700px;
-            background: var(--bg-color);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-            transition: background 0.3s;
-        }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(270deg, #d3cce3, #e9e4f0, #cfd9df);
+      background-size: 600% 600%;
+      animation: gradientBG 15s ease infinite;
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      transition: background 0.5s ease, color 0.5s ease;
+    }
 
-        .profile-pic {
-            width: 140px;
-            height: 140px;
-            border-radius: 50%;
-            object-fit: cover;
-            display: block;
-            margin: 0 auto 20px auto;
-            border: 4px solid var(--accent-color);
-        }
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
 
-        h1 {
-            text-align: center;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-        }
+    .container {
+      width: 90%;
+      max-width: 700px;
+      background: var(--bg-color);
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: background 0.5s ease, color 0.5s ease;
+    }
+    .profile-pic {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 20px auto;
+      border: 4px solid var(--accent-color);
+      transition: border 0.5s ease;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      color: var(--primary-color);
+      transition: color 0.5s ease;
+    }
+    h2 {
+      color: var(--primary-color);
+      border-bottom: 2px solid #ccc;
+      padding-bottom: 5px;
+      transition: color 0.5s ease;
+    }
+    p, ul {
+      line-height: 1.6;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .social a {
+      text-decoration: none;
+      color: #4267B2;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+    .social a:hover {
+      text-decoration: underline;
+    }
+    .toggle-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .animated-text {
+      text-align: center;
+      font-size: 1.1rem;
+      margin-top: -10px;
+      height: 30px;
+      color: var(--primary-color);
+      font-weight: 600;
+    }
+    .animated-text span {
+      display: inline-block;
+      overflow: hidden;
+      white-space: nowrap;
+      border-right: 2px solid var(--primary-color);
+      animation: typing 3s steps(40, end), blink 0.75s step-end infinite;
+    }
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    @keyframes blink {
+      50% { border-color: transparent; }
+    }
 
-        h2 {
-            color: var(--primary-color);
-            border-bottom: 2px solid #ccc;
-            padding-bottom: 5px;
-        }
-
-        p, ul {
-            line-height: 1.6;
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        .section {
-            margin-bottom: 25px;
-        }
-
-        .social a {
-            text-decoration: none;
-            color: #4267B2;
-            font-weight: bold;
-        }
-
-            .social a:hover {
-                text-decoration: underline;
-            }
-
-        .toggle-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 15px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-    </style>
+    /* Image upload styles */
+    #imageUpload {
+      display: block;
+      margin: 10px auto 20px auto;
+    }
+    #imagePreview {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    #imagePreview img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+    }
+    #imagePreview img:hover {
+      transform: scale(1.05);
+    }
+  </style>
 </head>
 <body>
-    <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
-    <div class="container">
-        <img src="profile.jpg" alt="Kajol Hasan" class="profile-pic" />
-        <h1>Kajol Hasan</h1>
+  <button class="toggle-btn" onclick="toggleDarkMode()">Toggle Dark Mode</button>
+  <div class="container">
+    <img src="profile.jpg" alt="Kajol Hasan" class="profile-pic" />
+    <h1>Kajol Hasan</h1>
+    <div class="animated-text"><span>A storyteller of life’s little wonders...</span></div>
 
-        <div class="section">
-            <h2>About Me</h2>
-            <p>A curious soul navigating the world through stories and experiences. I find inspiration in nature, connection in conversations, and joy in the simple things. This space is where I share my thoughts on everything from travel and creativity to the everyday wonders that often go unnoticed.</p>
-        </div>
-
-        <div class="section">
-            <h2>Contact</h2>
-            <p>Phone: +8801923771222</p>
-        </div>
-
-        <div class="section">
-            <h2>Social Media</h2>
-            <p class="social"><a href="https://facebook.com/kajolhasan" target="_blank">Facebook</a></p>
-        </div>
-
-        <div class="section">
-            <h2>Skills</h2>
-            <ul>
-                <li>Photoshop</li>
-                <li>MS Office</li>
-                <li>Hardware & Software</li>
-            </ul>
-        </div>
-
-        <div class="section">
-            <h2>Work & Education</h2>
-            <p>Working in a multinational company.</p>
-        </div>
-
-        <div class="section">
-            <h2>Hobbies & Interests</h2>
-            <p>Gadgets</p>
-        </div>
+    <div class="section">
+      <h2>About Me</h2>
+      <p>A curious soul navigating the world through stories and experiences. I find inspiration in nature, connection in conversations, and joy in the simple things. This space is where I share my thoughts on everything from travel and creativity to the everyday wonders that often go unnoticed.</p>
     </div>
-    <script>function toggleDarkMode() {
+
+    <div class="section">
+      <h2>Contact</h2>
+      <p>Phone: +8801923771222</p>
+    </div>
+
+    <div class="section">
+      <h2>Social Media</h2>
+      <p class="social"><a href="https://facebook.com/kajolhasan" target="_blank">Facebook</a></p>
+    </div>
+
+    <div class="section">
+      <h2>Skills</h2>
+      <ul>
+        <li>Photoshop</li>
+        <li>MS Office</li>
+        <li>Hardware & Software</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Work & Education</h2>
+      <p>Working in a multinational company.</p>
+    </div>
+
+    <div class="section">
+      <h2>Hobbies & Interests</h2>
+      <p>Gadgets</p>
+    </div>
+
+    <div class="section">
+      <h2>Upload Images</h2>
+      <input type="file" id="imageUpload" accept="image/*" multiple />
+      <div id="imagePreview"></div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
       document.body.classList.toggle('dark');
-    }</script>
+    }
+
+    const imageUpload = document.getElementById('imageUpload');
+    const imagePreview = document.getElementById('imagePreview');
+
+    imageUpload.addEventListener('change', () => {
+      imagePreview.innerHTML = ''; // Clear previous previews
+      const files = imageUpload.files;
+      if (files.length === 0) return;
+
+      for (const file of files) {
+        if (!file.type.startsWith('image/')) continue;
+
+        const reader = new FileReader();
+        reader.onload = e => {
+          const img = document.createElement('img');
+          img.src = e.target.result;
+          imagePreview.appendChild(img);
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
 </body>
 </html>
