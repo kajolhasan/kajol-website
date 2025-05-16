@@ -1,358 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kajol Hasan - Personal Page</title>
-<!-- Google Fonts and Material Icons -->
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-<style>
-  /* Reset & base */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    background: linear-gradient(-45deg, #6b4eae, #a179d1, #d6caf6, #a179d1);
-    background-size: 400% 400%;
-    animation: gradientBG 15s ease infinite;
-    color: #4b367c;
-    transition: background-color 0.5s, color 0.5s;
-  }
-
-  @keyframes gradientBG {
-    0% {background-position:0% 50%;}
-    50% {background-position:100% 50%;}
-    100% {background-position:0% 50%;}
-  }
-
-  .container {
-    max-width: 700px;
-    margin: 40px auto 60px;
-    background: #fff;
-    border-radius: 20px;
-    padding: 30px 20px 40px;
-    box-shadow: 0 15px 25px rgba(0,0,0,0.15);
-    transition: background-color 0.5s, color 0.5s;
-  }
-
-  /* Profile header with background image */
-  .profile-header {
-    background: url('https://kajolhasan.github.io/kajol-website/images/background.jpg') no-repeat center center;
-    background-size: cover;
-    padding: 40px 20px;
-    border-radius: 20px 20px 0 0;
-    text-align: center;
-    color: white;
-    box-shadow: inset 0 0 0 2000px rgba(107, 78, 174, 0.5);
-    margin-bottom: 25px;
-  }
-
-  .profile-header img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    border: 4px solid #d1c4e9;
-    object-fit: cover;
-    background-color: white;
-  }
-
-  .profile-header h1 {
-    margin: 15px 0 10px;
-    font-weight: 700;
-    font-size: 2.4rem;
-  }
-
-  .profile-header .typing-text {
-    font-size: 1.2rem;
-    font-weight: 600;
-    font-style: italic;
-    min-height: 28px;
-    white-space: nowrap;
-    overflow: hidden;
-    border-right: .15em solid white;
-    animation: typing 3.5s steps(30, end), blink-caret 0.75s step-end infinite;
-  }
-
-  @keyframes typing {
-    from { width: 0 }
-    to { width: 100% }
-  }
-
-  @keyframes blink-caret {
-    50% { border-color: transparent }
-  }
-
-  /* Section styling */
-  h2 {
-    color: #6b4eae;
-    border-bottom: 2px solid #b29ddb;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-  }
-
-  ul {
-    padding-left: 20px;
-    margin-top: 0;
-  }
-
-  li {
-    margin-bottom: 8px;
-    font-size: 1rem;
-  }
-
-  /* Material icons with skills */
-  .skill-icon {
-    vertical-align: middle;
-    color: #6b4eae;
-    margin-right: 8px;
-  }
-
-  /* Fade-in animation */
-  .fade-in {
-    opacity: 0;
-    transform: translateY(20px);
-    animation-fill-mode: forwards;
-    animation-name: fadeInUp;
-    animation-duration: 1s;
-    animation-timing-function: ease-out;
-  }
-
-  @keyframes fadeInUp {
-    to {
-      opacity: 1;
-      transform: translateY(0);
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kajol Hasan</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
+  <style>
+    * {
+      box-sizing: border-box;
     }
-  }
-
-  /* Dark mode toggle */
-  .toggle-container {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 15px;
-  }
-
-  .switch {
-    position: relative;
-    display: inline-block;
-    width: 48px;
-    height: 26px;
-  }
-
-  .switch input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-
-  .slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background-color: #ccc;
-    border-radius: 26px;
-    transition: .4s;
-  }
-
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 20px; width: 20px;
-    left: 3px;
-    bottom: 3px;
-    background-color: white;
-    border-radius: 50%;
-    transition: .4s;
-  }
-
-  input:checked + .slider {
-    background-color: #6b4eae;
-  }
-
-  input:checked + .slider:before {
-    transform: translateX(22px);
-  }
-
-  /* Dark mode styles */
-  body.dark-mode {
-    background: #1a1a2e;
-    color: #d0c9f5;
-  }
-
-  body.dark-mode .container {
-    background: #292b3e;
-    color: #d0c9f5;
-  }
-
-  body.dark-mode .profile-header {
-    box-shadow: inset 0 0 0 2000px rgba(107, 78, 174, 0.8);
-    color: #d0c9f5;
-  }
-
-  body.dark-mode h2 {
-    border-color: #9b8de3;
-  }
-
-  /* Contact form styles */
-  form {
-    margin-top: 20px;
-  }
-
-  label {
-    display: block;
-    margin-bottom: 6px;
-    font-weight: 600;
-  }
-
-  input, textarea {
-    width: 100%;
-    padding: 8px 10px;
-    margin-bottom: 15px;
-    border: 1.5px solid #b29ddb;
-    border-radius: 6px;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s;
-  }
-
-  input:focus, textarea:focus {
-    border-color: #6b4eae;
-    outline: none;
-  }
-
-  button {
-    background-color: #6b4eae;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 30px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-
-  button:hover {
-    background-color: #563d85;
-  }
-
-  /* Dark mode form */
-  body.dark-mode input, body.dark-mode textarea {
-    background: #413f5a;
-    border-color: #9b8de3;
-    color: #d0c9f5;
-  }
-
-  body.dark-mode input:focus, body.dark-mode textarea:focus {
-    border-color: #d6caf6;
-  }
-
-</style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background-color 0.5s, color 0.5s;
+    }
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+    header {
+      background: url('images/background.jpg') center/cover no-repeat;
+      text-align: center;
+      padding: 80px 20px;
+      position: relative;
+      color: white;
+    }
+    header h1 {
+      font-size: 3em;
+    }
+    .typing {
+      border-right: 3px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0;
+      animation: typing 4s steps(40, end) infinite alternate;
+    }
+    @keyframes typing {
+      from { width: 0; }
+      to { width: 100%; }
+    }
+    #langToggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+    }
+    .container {
+      padding: 20px;
+    }
+    section {
+      margin-bottom: 40px;
+    }
+    .skills i {
+      vertical-align: middle;
+      margin-right: 10px;
+    }
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      margin: 10px;
+    }
+    .portfolio-item {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+    }
+    .dark-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+    }
+  </style>
 </head>
 <body>
 
-<div class="container">
-  <div class="toggle-container">
-    <label class="switch" title="Toggle Dark Mode">
-      <input type="checkbox" id="darkModeToggle" />
-      <span class="slider"></span>
-    </label>
+<header>
+  <div id="langToggle">
+    <button onclick="setLanguage('en')">English</button>
+    <button onclick="setLanguage('bn')">বাংলা</button>
   </div>
+  <img src="images/profile-pic.jpg" alt="Kajol Hasan" width="120" style="border-radius: 50%; border: 3px solid white;" />
+  <h1>Kajol Hasan</h1>
+  <p class="typing" id="typingText">Exploring life through stories and creativity...</p>
+</header>
 
-  <header class="profile-header">
-    <img src="https://kajolhasan.github.io/kajol-website/images/profile-pic.jpg" alt="Kajol Hasan" />
-    <h1>Kajol Hasan</h1>
-    <div class="typing-text">A storyteller of life’s little wonders...</div>
-  </header>
+<div class="container">
 
-  <section class="fade-in" style="animation-delay: 0.1s;">
-    <h2>About Me</h2>
-    <p>A curious soul navigating the world through stories and experiences. I find inspiration in nature, connection in conversations, and joy in the simple things. This space is where I share my thoughts on everything from travel and creativity to the everyday wonders that often go unnoticed.</p>
+  <section id="about" data-aos="fade-up">
+    <h2 data-en="About Me" data-bn="আমার সম্পর্কে">About Me</h2>
+    <p data-en="A curious soul navigating the world through stories..." 
+       data-bn="একজন কৌতূহলী আত্মা, যিনি গল্পের মাধ্যমে জীবন আবিষ্কার করেন...">
+      A curious soul navigating the world through stories...
+    </p>
   </section>
 
-  <section class="fade-in" style="animation-delay: 0.3s;">
-    <h2>Skills</h2>
+  <section id="skills" class="skills" data-aos="fade-up">
+    <h2 data-en="Skills" data-bn="দক্ষতা">Skills</h2>
     <ul>
-      <li><span class="material-icons skill-icon">brush</span> Photoshop</li>
-      <li><span class="material-icons skill-icon">description</span> MS Office</li>
-      <li><span class="material-icons skill-icon">settings</span> Hardware & Software</li>
+      <li><i class="material-icons">brush</i> Photoshop</li>
+      <li><i class="material-icons">table_chart</i> MS Office</li>
+      <li><i class="material-icons">settings</i> Hardware & Software</li>
     </ul>
   </section>
 
-  <section class="fade-in" style="animation-delay: 0.5s;">
-    <h2>Work & Education</h2>
-    <p>Currently working in a multinational company with experience in various domains.</p>
+  <section id="portfolio" data-aos="fade-up">
+    <h2 data-en="Portfolio" data-bn="পোর্টফোলিও">Portfolio</h2>
+    <div class="portfolio-item">
+      <h3>Sample Project</h3>
+      <p>Short description of your project or work here.</p>
+    </div>
   </section>
 
-  <section class="fade-in" style="animation-delay: 0.7s;">
-    <h2>Hobbies & Interests</h2>
-    <p>Gadgets, technology, and discovering new innovations.</p>
+  <section id="gallery" data-aos="fade-up">
+    <h2 data-en="Photo Gallery" data-bn="ছবির গ্যালারি">Photo Gallery</h2>
+    <div class="gallery">
+      <img src="images/sample1.jpg" alt="Gallery Image" />
+      <img src="images/sample2.jpg" alt="Gallery Image" />
+    </div>
   </section>
 
-  <section class="fade-in" style="animation-delay: 0.9s;">
-    <h2>Contact</h2>
+  <section id="blog" data-aos="fade-up">
+    <h2 data-en="Blog" data-bn="ব্লগ">Blog</h2>
+    <article>
+      <h3>First Blog Post</h3>
+      <p>This is a sample blog post. You can update it with your own writing.</p>
+    </article>
+  </section>
+
+  <section id="facebook" data-aos="fade-up">
+    <h2>Facebook</h2>
+    <img src="https://www.facebook.com/kajol.hasan/picture" alt="Facebook Profile" width="100" />
+    <p>Kajol Hasan</p>
+    <p>Storyteller. Explorer. Optimist.</p>
+  </section>
+
+  <section id="contact" data-aos="fade-up">
+    <h2 data-en="Contact Me" data-bn="যোগাযোগ করুন">Contact Me</h2>
     <p>Phone: +8801923771222</p>
-    <p>Facebook: <a href="https://www.facebook.com/kajol.hasan" target="_blank" rel="noopener">kajol.hasan</a></p>
-
-    <form id="contactForm" novalidate>
-      <label for="name">Name *</label>
-      <input type="text" id="name" name="name" required placeholder="Your name" />
-      
-      <label for="email">Email *</label>
-      <input type="email" id="email" name="email" required placeholder="Your email" />
-      
-      <label for="message">Message *</label>
-      <textarea id="message" name="message" rows="4" required placeholder="Write your message here"></textarea>
-      
-      <button type="submit">Send Message</button>
+    <p>Facebook: <a href="https://www.facebook.com/kajol.hasan/" target="_blank">kajol.hasan</a></p>
+    <form>
+      <input type="text" placeholder="Your Name" required><br>
+      <input type="email" placeholder="Your Email" required><br>
+      <textarea placeholder="Message" required></textarea><br>
+      <button type="submit">Send</button>
     </form>
   </section>
 </div>
 
+<div class="dark-toggle">
+  <label>
+    <input type="checkbox" id="darkModeToggle" /> Dark Mode
+  </label>
+</div>
+
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 <script>
-  // Dark mode toggle
+  AOS.init();
+
+  // Dark mode
   const toggle = document.getElementById('darkModeToggle');
   toggle.addEventListener('change', () => {
-    document.body.classList.toggle('dark-mode', toggle.checked);
+    document.body.classList.toggle('dark-mode');
   });
 
-  // Animate fade-in on page load with delays handled via CSS inline style
-
-  // Contact form validation & simple submit action
-  const form = document.getElementById('contactForm');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    // Simple validation
-    const name = form.name.value.trim();
-    const email = form.email.value.trim();
-    const message = form.message.value.trim();
-
-    if (!name) {
-      alert("Please enter your name.");
-      form.name.focus();
-      return;
-    }
-    if (!email || !validateEmail(email)) {
-      alert("Please enter a valid email address.");
-      form.email.focus();
-      return;
-    }
-    if (!message) {
-      alert("Please enter your message.");
-      form.message.focus();
-      return;
-    }
-
-    // Here you could send form data to backend or service (like Formspree or EmailJS)
-    alert("Thank you for your message, " + name + "! I will get back to you soon.");
-    form.reset();
-  });
-
-  function validateEmail(email) {
-    // Simple regex email validation
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  // Language toggle
+  function setLanguage(lang) {
+    document.querySelectorAll('[data-en]').forEach(el => {
+      el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
+    });
   }
 </script>
 
