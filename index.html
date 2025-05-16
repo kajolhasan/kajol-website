@@ -1,219 +1,108 @@
+// File: app/page.tsx (Home Page)
+'use client';
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kajol Hasan</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      transition: background-color 0.5s, color 0.5s;
-      text-align: center;
-    }
-    .dark-mode { background-color: #121212; color: white; }
-    header {
-      background: url('images/background.jpg') center/cover no-repeat;
-      text-align: center;
-      padding: 80px 20px;
-      position: relative;
-      color: white;
-    }
-    header h1 { font-size: 3em; }
-    .typing {
-      border-right: 3px solid white;
-      white-space: nowrap;
-      overflow: hidden;
-      width: 0;
-      animation: typing 4s steps(40, end) infinite alternate;
-    }
-    @keyframes typing {
-      from { width: 0; }
-      to { width: 100%; }
-    }
-    #langToggle { position: absolute; top: 20px; right: 20px; }
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-    section {
-      margin-bottom: 40px;
-      text-align: center;
-    }
-    .skills i { vertical-align: middle; margin-right: 10px; }
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 15px;
-      justify-items: center;
-    }
-    .gallery img {
-      width: 100%;
-      max-width: 250px;
-      border-radius: 10px;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      cursor: pointer;
-    }
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
-    }
-    .portfolio-item {
-      border: 1px solid #ccc;
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 8px;
-    }
-    form {
-      display: inline-block;
-      text-align: left;
-    }
-    .dark-toggle {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-    }
-    /* Lightbox styles */
-    #lightbox {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
-    #lightbox img {
-      max-width: 90%;
-      max-height: 80%;
-      border-radius: 10px;
-      box-shadow: 0 0 20px rgba(255,255,255,0.5);
-    }
-  </style>
-</head>
-<body>
+import { useState, useEffect } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useRouter } from 'next/navigation';
 
-<header>
-  <div id="langToggle">
-    <button onclick="setLanguage('en')">English</button>
-    <button onclick="setLanguage('bn')">বাংলা</button>
-  </div>
-  <img src="images/profile-pic.jpg" ... style="border-radius: 50%; border: 3px solid white;" />
-  <h1>Kajol Hasan</h1>
-  <p class="typing" id="typingText">Exploring life through stories and creativity...</p>
-</header>
+export default function Home() {
+  const [lang, setLang] = useState<'en' | 'bn'>('en');
+  const [darkMode, setDarkMode] = useState(false);
+  const router = useRouter();
 
-<div class="container">
+  useEffect(() => {
+    AOS.init();
+  }, []);
 
-  <section id="about" data-aos="fade-up">
-    <h2 data-en="About Me" data-bn="আমার সম্পর্কে">About Me</h2>
-    <p data-en="A curious soul navigating the world through stories..." 
-       data-bn="একজন কৌতূহলী আত্মা, যিনি গল্পের মাধ্যমে জীবন আবিষ্কার করেন...">
-      A curious soul navigating the world through stories...
-    </p>
-  </section>
+  const toggleLanguage = () => {
+    setLang((prev) => (prev === 'en' ? 'bn' : 'en'));
+  };
 
-  <section id="skills" class="skills" data-aos="fade-up">
-    <h2 data-en="Skills" data-bn="দক্ষতা">Skills</h2>
-    <ul>
-      <li><i class="material-icons">brush</i> Photoshop</li>
-      <li><i class="material-icons">table_chart</i> MS Office</li>
-      <li><i class="material-icons">settings</i> Hardware & Software</li>
-    </ul>
-  </section>
-
-  <section id="portfolio" data-aos="fade-up">
-    <h2 data-en="Portfolio" data-bn="পোর্টফোলিও">Portfolio</h2>
-    <div class="portfolio-item">
-      <h3>Sample Project</h3>
-      <p>Short description of your project or work here.</p>
-    </div>
-  </section>
-
-  <section id="gallery" data-aos="fade-up">
-    <h2 data-en="Photo Gallery" data-bn="ছবির গ্যালারি">Photo Gallery</h2>
-    <div class="gallery">
-      <img src="images/sample1.jpg" alt="Gallery Image 1" onclick="openLightbox(this)" />
-      <img src="images/sample2.jpg" alt="Gallery Image 2" onclick="openLightbox(this)" />
-    </div>
-  </section>
-
-  <section id="blog" data-aos="fade-up">
-    <h2 data-en="Blog" data-bn="ব্লগ">Blog</h2>
-    <article>
-      <h3>First Blog Post</h3>
-      <p>This is a sample blog post. You can update it with your own writing.</p>
-    </article>
-  </section>
-
-  <section id="facebook" data-aos="fade-up">
-  <h2>Facebook</h2>
-  <img src="images/fb-profile.jpg" alt="Facebook Profile" width="100" style="border-radius: 50%; border: 2px solid #ccc;" />
-  <p style="color: #ff4081;">Kajol Hasan</p>
-  <p style="font-style: italic;">Storyteller. Explorer. Optimist.</p>
-  </section>
-
-
-  <section id="contact" data-aos="fade-up">
-    <h2 data-en="Contact Me" data-bn="যোগাযোগ করুন">Contact Me</h2>
-    <p>Phone: +8801923771222</p>
-    <p>Facebook: <a href="https://www.facebook.com/kajol.hasan/" target="_blank">kajol.hasan</a></p>
-    <form>
-      <input type="text" placeholder="Your Name" required><br>
-      <input type="email" placeholder="Your Email" required><br>
-      <textarea placeholder="Message" required></textarea><br>
-      <button type="submit">Send</button>
-    </form>
-  </section>
-</div>
-
-<div class="dark-toggle">
-  <label>
-    <input type="checkbox" id="darkModeToggle" /> Dark Mode
-  </label>
-</div>
-
-<!-- Lightbox container -->
-<div id="lightbox" onclick="closeLightbox()">
-  <img id="lightbox-img" src="" alt="Enlarged Image" />
-</div>
-
-<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-<script>
-  AOS.init();
-
-  // Dark mode toggle
-  const toggle = document.getElementById('darkModeToggle');
-  toggle.addEventListener('change', () => {
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
     document.body.classList.toggle('dark-mode');
-  });
+  };
 
-  // Language toggle
-  function setLanguage(lang) {
-    document.querySelectorAll('[data-en]').forEach(el => {
-      el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
-    });
-  }
+  const text = {
+    about: { en: 'About Me', bn: 'আমার সম্পর্কে' },
+    skills: { en: 'Skills', bn: 'দক্ষতা' },
+    portfolio: { en: 'Portfolio', bn: 'পোর্টফোলিও' },
+    gallery: { en: 'Photo Gallery', bn: 'ছবির গ্যালারি' },
+    blog: { en: 'Blog', bn: 'ব্লগ' },
+    contact: { en: 'Contact Me', bn: 'যোগাযোগ করুন' },
+  };
 
-  // Lightbox functions
-  function openLightbox(img) {
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    lightboxImg.src = img.src;
-    lightbox.style.display = 'flex';
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-  }
-</script>
+  return (
+<main className="text-center px-4 py-6">
+    <header className="relative bg-cover bg-center py-20 text-white" style={{ backgroundImage: "url('/images/background.jpg')" }}>
+        <div className="absolute top-4 right-4 flex gap-2">
+            <button onClick={toggleLanguage} className="bg-white text-black px-2 py-1 rounded">
+                {lang === 'en' ? 'বাংলা' : 'English'}
+            </button>
+            <button onClick={toggleDarkMode} className="bg-white text-black px-2 py-1 rounded">
+                {darkMode ? 'Light' : 'Dark'}
+            </button>
+        </div>
+        <Image src="/images/profile-pic.jpg"
+               alt="Kajol Hasan"
+               width={120}
+               height={120}
+               className="rounded-full border-4 border-white mx-auto" />
+        <h1 className="text-4xl font-bold mt-4">Kajol Hasan</h1>
+        <p className="mt-2 text-lg animate-pulse">Exploring life through stories and creativity...</p>
+    </header>
 
-</body>
-</html>
+    <section id="about" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-pink-500 font-bold">{text.about[lang]}</h2>
+        <p className="mt-2">
+            {lang === 'en'
+            ? 'A curious soul navigating the world through stories...'
+            : 'একজন কৌতূহলী আত্মা, যিনি গল্পের মাধ্যমে জীবন আবিষ্কার করেন...'}
+        </p>
+    </section>
+
+    <section id="skills" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-blue-500 font-bold">{text.skills[lang]}</h2>
+        <ul className="mt-4 space-y-2">
+            <li>🎨 Photoshop</li>
+            <li>📊 MS Office</li>
+            <li>🛠️ Hardware & Software</li>
+        </ul>
+    </section>
+
+    <section id="portfolio" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-green-600 font-bold">{text.portfolio[lang]}</h2>
+        <Link href="/portfolio" className="text-blue-400 underline mt-2 inline-block">
+        View Portfolio
+        </Link>
+    </section>
+
+    <section id="gallery" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-purple-600 font-bold">{text.gallery[lang]}</h2>
+        <Link href="/gallery" className="text-blue-400 underline mt-2 inline-block">
+        View Gallery
+        </Link>
+    </section>
+
+    <section id="blog" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-orange-500 font-bold">{text.blog[lang]}</h2>
+        <Link href="/blog" className="text-blue-400 underline mt-2 inline-block">
+        Read Blog
+        </Link>
+    </section>
+
+    <section id="contact" data-aos="fade-up" className="py-8">
+        <h2 className="text-2xl text-red-500 font-bold">{text.contact[lang]}</h2>
+        <form action="/api/contact" method="POST" className="max-w-md mx-auto mt-4 space-y-4">
+            <input type="text" name="name" placeholder="Your Name" required className="w-full px-4 py-2 border rounded" />
+            <input type="email" name="email" placeholder="Your Email" required className="w-full px-4 py-2 border rounded" />
+            <textarea name="message" placeholder="Message" required className="w-full px-4 py-2 border rounded"></textarea>
+            <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">Send</button>
+        </form>
+    </section>
+</main>
+  );
+}
