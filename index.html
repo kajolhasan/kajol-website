@@ -23,12 +23,12 @@
         }
 
         .dark-mode {
-            background-color: #1a1a1a;
+            background-color: #00008B;
             color: #f8f8f2;
         }
 
         header {
-            background: url('images/header-bg-abstract.jpg') center/cover no-repeat;
+            background: url('images/background.jpg') center/cover no-repeat;
             text-align: center;
             padding: 100px 20px;
             position: relative;
@@ -36,37 +36,27 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-            header h1 {
-                font-size: 3.5em;
-                margin-bottom: 10px;
-            }
+        header h1 {
+            font-size: 3.5em;
+            margin-bottom: 10px;
+        }
 
         .typing {
             border-right: 4px solid #eee;
             white-space: nowrap;
             overflow: hidden;
             width: 0;
-            animation: typing 4s steps(40, end) infinite alternate, blink-caret .75s step-end infinite;
+            animation: typing 6s steps(40, end) infinite alternate, blink-caret .75s step-end infinite; /* Increased typing animation duration to 6s */
         }
 
         @keyframes typing {
-            from {
-                width: 0;
-            }
-
-            to {
-                width: 100%;
-            }
+            from { width: 0; }
+            to { width: 100%; }
         }
 
         @keyframes blink-caret {
-            from, to {
-                border-color: transparent
-            }
-
-            50% {
-                border-color: #eee;
-            }
+            from, to { border-color: transparent }
+            50% { border-color: #eee; }
         }
 
         #langToggle {
@@ -76,21 +66,21 @@
             z-index: 10;
         }
 
-            #langToggle button {
-                background: rgba(255, 255, 255, 0.15);
-                color: #fff;
-                border: none;
-                padding: 8px 12px;
-                margin-left: 5px;
-                border-radius: 5px;
-                cursor: pointer;
-                font-size: 0.9em;
-                transition: background-color 0.3s ease;
-            }
+        #langToggle button {
+            background: rgba(255, 255, 255, 0.15);
+            color: #fff;
+            border: none;
+            padding: 8px 12px;
+            margin-left: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: background-color 0.3s ease;
+        }
 
-                #langToggle button:hover {
-                    background-color: rgba(255, 255, 255, 0.3);
-                }
+        #langToggle button:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
 
         .container {
             max-width: 900px;
@@ -111,32 +101,32 @@
             text-align: center;
         }
 
-            section h2 {
-                color: #e74c3c;
-                font-size: 2.5em;
-                margin-bottom: 20px;
-                position: relative;
-                padding-bottom: 10px;
-                display: inline-block;
-            }
+        section h2 {
+            color: #e74c3c;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
 
-                section h2::after {
-                    content: '';
-                    position: absolute;
-                    left: 50%;
-                    bottom: 0;
-                    transform: translateX(-50%);
-                    height: 3px;
-                    width: 50px;
-                    background-color: #e74c3c;
-                }
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            transform: translateX(-50%);
+            height: 3px;
+            width: 50px;
+            background-color: #e74c3c;
+        }
 
-            section p {
-                color: #555;
-                font-size: 1.1em;
-                line-height: 1.8;
-                margin-bottom: 20px;
-            }
+        section p {
+            color: #555;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
 
         .dark-mode section p {
             color: #ccc;
@@ -159,11 +149,11 @@
             margin-bottom: 10px;
         }
 
-            .skills li i {
-                margin-right: 15px;
-                font-size: 1.8em;
-                color: #3498db;
-            }
+        .skills li i {
+            margin-right: 15px;
+            font-size: 1.8em;
+            color: #3498db;
+        }
 
         .portfolio {
             display: grid;
@@ -203,19 +193,19 @@
             justify-items: center;
         }
 
-            .gallery img {
-                width: 100%;
-                max-width: 250px;
-                border-radius: 10px;
-                transition: transform 0.3s ease, box-shadow 0.3s ease;
-                cursor: pointer;
-                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            }
+        .gallery img {
+            width: 100%;
+            max-width: 250px;
+            border-radius: 10px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-                .gallery img:hover {
-                    transform: scale(1.05);
-                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-                }
+        .gallery img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
 
         #lightbox {
             position: fixed;
@@ -230,16 +220,16 @@
             z-index: 10000;
         }
 
-            #lightbox img {
-                max-width: 95%;
-                max-height: 90%;
-                border-radius: 12px;
-                box-shadow: 0 0 30px rgba(255,255,255,0.6);
-            }
+        #lightbox img {
+            max-width: 95%;
+            max-height: 90%;
+            border-radius: 12px;
+            box-shadow: 0 0 30px rgba(255,255,255,0.6);
+        }
 
-            #lightbox.active {
-                display: flex;
-            }
+        #lightbox.active {
+            display: flex;
+        }
 
         #blog article {
             text-align: left;
@@ -266,12 +256,12 @@
             align-items: center;
         }
 
-            #facebook img {
-                width: 120px;
-                border-radius: 50%;
-                margin-bottom: 10px;
-                border: 3px solid #3b5998;
-            }
+        #facebook img {
+            width: 120px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+            border: 3px solid #3b5998;
+        }
 
         #contact form {
             display: inline-block;
@@ -310,9 +300,9 @@
             transition: background-color 0.3s ease;
         }
 
-            #contact button[type="submit"]:hover {
-                background-color: #29b664;
-            }
+        #contact button[type="submit"]:hover {
+            background-color: #29b664;
+        }
 
         .dark-toggle {
             position: fixed;
@@ -327,6 +317,7 @@
             align-items: center;
             cursor: pointer;
             transition: background-color 0.3s ease;
+            opacity: 0.3;
         }
 
         .dark-mode .dark-toggle {
@@ -345,6 +336,11 @@
         .dark-toggle label {
             margin-left: 10px;
             cursor: pointer;
+            color: #000;
+        }
+
+        .dark-mode .dark-toggle label {
+             color: #fff;
         }
 
         .dark-toggle input[type="checkbox"] {
@@ -381,7 +377,7 @@
                 <li><i class="fas fa-code" style="color: #1abc9c;"></i> <span data-en="Web Development Basics" data-bn="ওয়েব ডেভেলপমেন্টের মূল বিষয়">Web Development Basics</span></li>
                 <li><i class="fas fa-camera-retro" style="color: #e67e22;"></i> <span data-en="Photography Enthusiast" data-bn="ফটোগ্রাফি উৎসাহী">Photography Enthusiast</span></li>
                 <li><i class="fas fa-file-excel" style="color: #27ae60;"></i> <span data-en="Data Management (MS Office)" data-bn="ডেটা ম্যানেজমেন্ট (এমএস অফিস)">Data Management (MS Office)</span></li>
-                <li><i class="fas fa-wrench" style="color: #34495e;"></i> <span data-en="Technical Troubleshooting" data-bn="কারিগরি সমস্যা সমাধান">Technical Troubleshooting</span></li>
+                 <li><i class="fas fa-wrench" style="color: #34495e;"></i> <span data-en="Technical Troubleshooting" data-bn="কারিগরি সমস্যা সমাধান">Technical Troubleshooting</span></li>
             </ul>
         </section>
 
@@ -391,19 +387,19 @@
                 <div class="portfolio-item">
                     <h3><span data-en="Website Mockup Project" data-bn="ওয়েবসাইট মকআপ প্রকল্প">Website Mockup Project</span></h3>
                     <p><span data-en="A conceptual design for a clean and modern portfolio website." data-bn="একটি পরিচ্ছন্ন এবং আধুনিক পোর্টফোলিও ওয়েবসাইটের জন্য একটি ধারণাগত ডিজাইন।">A conceptual design for a clean and modern portfolio website.</span></p>
-                </div>
+                    </div>
                 <div class="portfolio-item">
                     <h3><span data-en="Photography Portfolio" data-bn="ফটোগ্রাফি পোর্টফোলিও">Photography Portfolio</span></h3>
                     <p><span data-en="A selection of my favorite shots showcasing various styles and subjects." data-bn="বিভিন্ন শৈলী এবং বিষয়াবলী প্রদর্শন করে আমার প্রিয় শটগুলির একটি নির্বাচন।">A selection of my favorite shots showcasing various styles and subjects.</span></p>
+                    </div>
                 </div>
-            </div>
         </section>
 
         <section id="gallery" data-aos="fade-up">
             <h2>Photo Gallery</h2>
             <div class="gallery">
-                <img src="images/sample1.jpg" alt="Gallery Image 1" onclick="openLightbox()" />
-                <img src="images/sample2.jpg" alt="Gallery Image 2" onclick="openLightbox()" />
+                <img src="images/sample1.jpg" alt="Gallery Image 1" onclick="openLightbox(this)" />
+                <img src="images/sample2.jpg" alt="Gallery Image 2" onclick="openLightbox(this)" />
             </div>
         </section>
 
@@ -450,32 +446,39 @@
     <script>
         AOS.init();
 
-        const toggle = document.getElementById('darkModeToggle');
-        toggle.addEventListener('change', () => {
-            document.body.classList.toggle('dark-mode');
-        });
-
-        function setLanguage(lang) {
-            const elements = document.querySelectorAll('[data-en]'); // Corrected selector
-            elements.forEach(el => {
-                el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
+        document.addEventListener('DOMContentLoaded', () => {
+            const toggle = document.getElementById('darkModeToggle');
+            toggle.addEventListener('change', () => {
+                document.body.classList.toggle('dark-mode');
             });
-            if (lang === 'bn') {
-                document.title = "কাজল হাসান - সৃজনশীল অভিযাত্রী";
-            } else {
-                document.title = "Kajol Hasan - The Creative Explorer";
-            }
-        }
 
-        function openLightbox(img) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            lightboxImg.src = img.src;
-            lightbox.style.display = 'flex';
-        }
-        function closeLightbox() {
-            document.getElementById('lightbox').style.display = 'none';
-        }
+            function setLanguage(lang) {
+                const elements = document.querySelectorAll('[data-en]');
+                elements.forEach(el => {
+                    el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
+                });
+                if (lang === 'bn') {
+                    document.title = "কাজল হাসান - সৃজনশীল অভিযাত্রী";
+                } else {
+                    document.title = "Kajol Hasan - The Creative Explorer";
+                }
+            }
+
+            window.setLanguage = setLanguage; // Make it globally accessible
+
+            function openLightbox(img) {
+                const lightbox = document.getElementById('lightbox');
+                const lightboxImg = document.getElementById('lightbox-img');
+                lightboxImg.src = img.src;
+                lightbox.style.display = 'flex';
+            }
+            window.openLightbox = openLightbox;
+
+            function closeLightbox() {
+                document.getElementById('lightbox').style.display = 'none';
+            }
+            window.closeLightbox = closeLightbox;
+        });
     </script>
 
 </body>
