@@ -36,10 +36,10 @@
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
         }
 
-        header h1 {
-            font-size: 3.5em;
-            margin-bottom: 10px;
-        }
+            header h1 {
+                font-size: 3.5em;
+                margin-bottom: 10px;
+            }
 
         .typing {
             border-right: 4px solid #eee;
@@ -50,13 +50,23 @@
         }
 
         @keyframes typing {
-            from { width: 0; }
-            to { width: 100%; }
+            from {
+                width: 0;
+            }
+
+            to {
+                width: 100%;
+            }
         }
 
         @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: #eee; }
+            from, to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: #eee;
+            }
         }
 
         #langToggle {
@@ -66,21 +76,21 @@
             z-index: 10;
         }
 
-        #langToggle button {
-            background: rgba(255, 255, 255, 0.15);
-            color: #fff;
-            border: none;
-            padding: 8px 12px;
-            margin-left: 5px;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 0.9em;
-            transition: background-color 0.3s ease;
-        }
+            #langToggle button {
+                background: rgba(255, 255, 255, 0.15);
+                color: #fff;
+                border: none;
+                padding: 8px 12px;
+                margin-left: 5px;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 0.9em;
+                transition: background-color 0.3s ease;
+            }
 
-        #langToggle button:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-        }
+                #langToggle button:hover {
+                    background-color: rgba(255, 255, 255, 0.3);
+                }
 
         .container {
             max-width: 900px;
@@ -101,32 +111,32 @@
             text-align: center;
         }
 
-        section h2 {
-            color: #e74c3c;
-            font-size: 2.5em;
-            margin-bottom: 20px;
-            position: relative;
-            padding-bottom: 10px;
-            display: inline-block;
-        }
+            section h2 {
+                color: #e74c3c;
+                font-size: 2.5em;
+                margin-bottom: 20px;
+                position: relative;
+                padding-bottom: 10px;
+                display: inline-block;
+            }
 
-        section h2::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            bottom: 0;
-            transform: translateX(-50%);
-            height: 3px;
-            width: 50px;
-            background-color: #e74c3c;
-        }
+                section h2::after {
+                    content: '';
+                    position: absolute;
+                    left: 50%;
+                    bottom: 0;
+                    transform: translateX(-50%);
+                    height: 3px;
+                    width: 50px;
+                    background-color: #e74c3c;
+                }
 
-        section p {
-            color: #555;
-            font-size: 1.1em;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
+            section p {
+                color: #555;
+                font-size: 1.1em;
+                line-height: 1.8;
+                margin-bottom: 20px;
+            }
 
         .dark-mode section p {
             color: #ccc;
@@ -149,11 +159,11 @@
             margin-bottom: 10px;
         }
 
-        .skills li i {
-            margin-right: 15px;
-            font-size: 1.8em;
-            color: #3498db;
-        }
+            .skills li i {
+                margin-right: 15px;
+                font-size: 1.8em;
+                color: #3498db;
+            }
 
         .portfolio {
             display: grid;
@@ -193,19 +203,19 @@
             justify-items: center;
         }
 
-        .gallery img {
-            width: 100%;
-            max-width: 250px;
-            border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0 2px 5px rgba(0, 0, 0, 0.1);
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
+            .gallery img {
+                width: 100%;
+                max-width: 250px;
+                border-radius: 10px;
+                transition: transform 0.3s ease, box-shadow 0 2px 5px rgba(0, 0, 0, 0.1);
+                cursor: pointer;
+                box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            }
 
-        .gallery img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-        }
+                .gallery img:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+                }
 
         #lightbox {
             position: fixed;
@@ -220,16 +230,16 @@
             z-index: 10000;
         }
 
-        #lightbox img {
-            max-width: 95%;
-            max-height: 90%;
-            border-radius: 12px;
-            box-shadow: 0 0 30px rgba(255,255,255,0.6);
-        }
+            #lightbox img {
+                max-width: 95%;
+                max-height: 90%;
+                border-radius: 12px;
+                box-shadow: 0 0 30px rgba(255,255,255,0.6);
+            }
 
-        #lightbox.active {
-            display: flex;
-        }
+            #lightbox.active {
+                display: flex;
+            }
 
         #blog article {
             text-align: left;
@@ -256,12 +266,12 @@
             align-items: center;
         }
 
-        #facebook img {
-            width: 120px;
-            border-radius: 50%;
-            margin-bottom: 10px;
-            border: 3px solid #3b5998;
-        }
+            #facebook img {
+                width: 120px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+                border: 3px solid #3b5998;
+            }
 
         #contact form {
             display: inline-block;
@@ -300,9 +310,9 @@
             transition: background-color 0.3s ease;
         }
 
-        #contact button[type="submit"]:hover {
-            background-color: #29b664;
-        }
+            #contact button[type="submit"]:hover {
+                background-color: #29b664;
+            }
 
         .dark-toggle {
             position: fixed;
@@ -340,7 +350,7 @@
         }
 
         .dark-mode .dark-toggle label {
-             color: #fff;
+            color: #fff;
         }
 
         .dark-toggle input[type="checkbox"] {
@@ -352,13 +362,33 @@
         }
 
         @keyframes rainbow-animation {
-            0% { color: #ff0000; }
-            17% { color: #ff8000; }
-            33% { color: #ffff00; }
-            50% { color: #008000; }
-            67% { color: #0000ff; }
-            83% { color: #4b0082; }
-            100% { color: #9400d3; }
+            0% {
+                color: #ff0000;
+            }
+
+            17% {
+                color: #ff8000;
+            }
+
+            33% {
+                color: #ffff00;
+            }
+
+            50% {
+                color: #008000;
+            }
+
+            67% {
+                color: #0000ff;
+            }
+
+            83% {
+                color: #4b0082;
+            }
+
+            100% {
+                color: #9400d3;
+            }
         }
     </style>
 </head>
@@ -391,7 +421,7 @@
                 <li><i class="fas fa-code" style="color: #1abc9c;"></i> <span data-en="Web Development Basics" data-bn="ওয়েব ডেভেলপমেন্টের মূল বিষয়">Web Development Basics</span></li>
                 <li><i class="fas fa-camera-retro" style="color: #e67e22;"></i> <span data-en="Photography Enthusiast" data-bn="ফটোগ্রাফি উৎসাহী">Photography Enthusiast</span></li>
                 <li><i class="fas fa-file-excel" style="color: #27ae60;"></i> <span data-en="Data Management (MS Office)" data-bn="ডেটা ম্যানেজমেন্ট (এমএস অফিস)">Data Management (MS Office)</span></li>
-                 <li><i class="fas fa-wrench" style="color: #34495e;"></i> <span data-en="Technical Troubleshooting" data-bn="কারিগরি সমস্যা সমাধান">Technical Troubleshooting</span></li>
+                <li><i class="fas fa-wrench" style="color: #34495e;"></i> <span data-en="Technical Troubleshooting" data-bn="কারিগরি সমস্যা সমাধান">Technical Troubleshooting</span></li>
             </ul>
         </section>
 
@@ -401,12 +431,12 @@
                 <div class="portfolio-item">
                     <h3><span data-en="Website Mockup Project" data-bn="ওয়েবসাইট মকআপ প্রকল্প">Website Mockup Project</span></h3>
                     <p><span data-en="A conceptual design for a clean and modern portfolio website." data-bn="একটি পরিচ্ছন্ন এবং আধুনিক পোর্টফোলিও ওয়েবসাইটের জন্য একটি ধারণাগত ডিজাইন।">A conceptual design for a clean and modern portfolio website.</span></p>
-                    </div>
+                </div>
                 <div class="portfolio-item">
                     <h3><span data-en="Photography Portfolio" data-bn="ফটোগ্রাফি পোর্টফোলিও">Photography Portfolio</span></h3>
                     <p><span data-en="A selection of my favorite shots showcasing various styles and subjects." data-bn="বিভিন্ন শৈলী এবং বিষয়াবলী প্রদর্শন করে আমার প্রিয় শটগুলির একটি নির্বাচন।">A selection of my favorite shots showcasing various styles and subjects.</span></p>
-                    </div>
                 </div>
+            </div>
         </section>
 
         <section id="gallery" data-aos="fade-up">
@@ -439,12 +469,13 @@
             <p style="color: #3e65cf;">Email: <a href="https://mail.google.com/mail/?view=cm&fs=1&to=kajol.hasan@gmail.com" style="color: #3e65cf;" target="_blank">kajol <span style="color: #3e65cf;">g</span><span style="color: #c71610;">m</span><span style="color: #f2a60c;">a</span><span style="color: #3b60c4;">i</span><span style="color: #08851b;">l</span></a></p>
             <p style="color: #6CC1E3;">Telegram: <a href="https://t.me/kajolhasan" style="color: #6CC1E3;" target="_blank">kajol hasan</a></p>
             <p style="color: #3b5998;">Facebook: <a href="https://www.facebook.com/kajol.hasan/" style="color: #3b5998;" target="_blank">kajol.hasan</a></p>
-            <form>
-                <input type="text" placeholder="Your Name" required><br>
-                <input type="email" placeholder="Your Email" required><br>
-                <textarea placeholder="Message" required></textarea><br>
+            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbwlFt13jORujZjavVlS53MmGYpIQ6RHL7b3B0wKWjuh-JK6B1QIcn6MGh4WqpUq4xcXxQ/exec">
+                <input type="text" name="Name" placeholder="Your Name" required><br>
+                <input type="email" name="Email" placeholder="Your Email" required><br>
+                <textarea name="Message" placeholder="Message" required></textarea><br>
                 <button type="submit">Send</button>
             </form>
+            <div id="status"></div>
         </section>
     </div>
 
