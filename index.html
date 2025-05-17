@@ -197,7 +197,7 @@
             width: 100%;
             max-width: 250px;
             border-radius: 10px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0 2px 5px rgba(0, 0, 0, 0.1);
             cursor: pointer;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -346,6 +346,20 @@
         .dark-toggle input[type="checkbox"] {
             display: none;
         }
+
+        .rainbow-text {
+            animation: rainbow-animation 4s linear infinite;
+        }
+
+        @keyframes rainbow-animation {
+            0% { color: #ff0000; }
+            17% { color: #ff8000; }
+            33% { color: #ffff00; }
+            50% { color: #008000; }
+            67% { color: #0000ff; }
+            83% { color: #4b0082; }
+            100% { color: #9400d3; }
+        }
     </style>
 </head>
 <body>
@@ -421,8 +435,10 @@
 
         <section id="contact" data-aos="fade-up">
             <h2 data-en="Let's Connect" data-bn="যোগাযোগ করি">Contact Me</h2>
-            <p>Phone: +8801923771222</p>
-            <p>Facebook: <a href="https://www.facebook.com/kajol.hasan/" target="_blank">kajol.hasan</a></p>
+            <p class="rainbow-text">Phone: +8801923771222</p>
+            <p style="color: #3e65cf;">Email: <a href="mailto:kajol.hasan@gmail.com" style="color: #3e65cf;">kajol <span style="color: #3e65cf;">g</span><span style="color: #c71610;">m</span><span style="color: #f2a60c;">a</span><span style="color: #3b60c4;">i</span><span style="color: #08851b;">l</span></a></p>
+            <p style="color: #6CC1E3;">Telegram: <a href="https://t.me/kajolhasan" style="color: #6CC1E3;" target="_blank">kajol hasan</a></p>
+            <p style="color: #3b5998;">Facebook: <a href="https://www.facebook.com/kajol.hasan/" style="color: #3b5998;" target="_blank">kajol.hasan</a></p>
             <form>
                 <input type="text" placeholder="Your Name" required><br>
                 <input type="email" placeholder="Your Email" required><br>
