@@ -400,7 +400,7 @@
             <button onclick="setLanguage('bn')">বাংলা</button>
         </div>
         <img src="images/profile-pic.jpg" alt="Kajol Hasan" width="120" style="border-radius: 50%; border: 3px solid #fff;" />
-        <h1>Kajol Hasan</h1>
+        <h1 style="color:#008000; font-family: 'Roboto', sans-serif;">Kajol Hasan</h1>
         <p class="typing" id="typingText" data-en="Exploring the intersection of creativity and technology" data-bn="সৃজনশীলতা এবং প্রযুক্তির সংযোগস্থলে অন্বেষণ করছি...">Exploring the intersection of creativity and technology</p>
     </header>
 
@@ -452,15 +452,23 @@
         <section id="blog" data-aos="fade-up">
             <h2 data-en="My Thoughts" data-bn="আমার ভাবনা">Blog</h2>
             <article>
-                <h3><span data-en="First Entry: The Journey Begins" data-bn="প্রথম প্রবিষ্টি: যাত্রা শুরু">First Entry: The Journey Begins</span></h3>
+                <h3 style="color:#2ecc71;"><span data-en="First Entry: The Journey Begins" data-bn="প্রথম প্রবিষ্টি: যাত্রা শুরু">First Entry: The Journey Begins</span></h3>
                 <p data-en="This is the beginning of my blog, where I'll share my thoughts and experiences." data-bn="এটি আমার ব্লগের শুরু, যেখানে আমি আমার চিন্তা ও অভিজ্ঞতা শেয়ার করব।">This is the beginning of my blog, where I'll share my thoughts and experiences.</p>
+            </article>
+            <article>
+                <h3 style="color:#3498db;"><span data-en="Second Entry: Design Principles" data-bn="দ্বিতীয় প্রবিষ্টি: ডিজাইনের মূলনীতি">Second Entry: Design Principles</span></h3>
+                <p data-en=" আলোচনা করছি ডিজাইনের কিছু গুরুত্বপূর্ণ মূলনীতি নিয়ে।" data-bn="Discussing some important design principles.">Discussing some important design principles.</p>
+            </article>
+            <article>
+                <h3 style="color:#9b59b6;"><span data-en="Third Entry: Coding Challenges" data-bn="তৃতীয় প্রবিষ্টি: কোডিং চ্যালেঞ্জ">Third Entry: Coding Challenges</span></h3>
+                <p data-en="Sharing my experiences with overcoming coding challenges." data-bn="কোডিং চ্যালেঞ্জ মোকাবিলা করার অভিজ্ঞতা শেয়ার করছি।">Sharing my experiences with overcoming coding challenges.</p>
             </article>
         </section>
 
         <section id="facebook" data-aos="fade-up">
             <h2>Facebook</h2>
             <img src="images/fb-profile.jpg" alt="Facebook Profile" width="120" />
-            <p>Kajol Hasan</p>
+            <p style="color:#008000; font-family: 'Roboto', sans-serif;">Kajol Hasan</p>
             <p data-en="Storyteller. Explorer. Optimist." data-bn="গল্পকথক। অভিযাত্রী। আশাবাদী।">Storyteller. Explorer. Optimist.</p>
         </section>
 
@@ -475,12 +483,13 @@
             </p>
             <p style="color: #6CC1E3;">
                 <i class="fab fa-telegram"></i>
-                <a href="https://t.me/kajolhasan" style="color: #6CC1E3;" target="_blank">kajolhasan</a>
+                <a href="https://t.me/kajolhasan" style="color: #6CC1E3;" target="_blank">kajol hasan</a>
             </p>
             <p style="color: #3b5998;">
                 <i class="fab fa-facebook"></i>
                 <a href="https://www.facebook.com/kajol.hasan/" style="color: #3b5998;" target="_blank">kajol.hasan</a>
-            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbwlFt13jORujZjavVlS53MmGYpIQ6RHL7b3B0wKWjuh-JK6B1QIcn6MGh4WqpUq4xcXxQ/exec">
+            </p>
+            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzL9J-T7xRjMSpIFj9Kz9eJ9N85e5EwM9Qy7cMmKUl9PuKz9KzK/exec">
                 <input type="text" name="Name" placeholder="Your Name" required><br>
                 <input type="email" name="Email" placeholder="Your Email" required><br>
                 <textarea name="Message" placeholder="Message" required></textarea><br>
@@ -536,6 +545,40 @@
                 document.getElementById('lightbox').style.display = 'none';
             }
             window.closeLightbox = closeLightbox;
+
+
+
+            const form = document.getElementById('contactForm');
+            const statusDiv = document.getElementById('status');
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                //disable the submit button to prevent multiple submissions
+                form.querySelector('button[type="submit"]').disabled = true;
+                statusDiv.textContent = 'Submitting...';
+
+                const formData = new FormData(form);
+
+                fetch(form.action, {
+                    method: 'POST',
+                    body: formData,
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        statusDiv.textContent = data.message;
+                        if (data.status === 'success') {
+                            form.reset();
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        statusDiv.textContent = 'An error occurred. Please try again.';
+                    })
+                    .finally(() => {
+                        form.querySelector('button[type="submit"]').disabled = false;
+                    });
+            });
         });
     </script>
 
