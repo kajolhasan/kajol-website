@@ -6,7 +6,7 @@
     <title>Kajol Hasan - The Creative Explorer</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <style>
         /* This is your inline CSS. For larger projects, consider moving this to a separate style.css file. */
@@ -86,11 +86,14 @@
                 border-radius: 5px;
                 cursor: pointer;
                 font-size: 0.9em;
-                transition: background-color 0.3s ease;
+                /* Added transition for hover effect */
+                transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
                 #langToggle button:hover {
                     background-color: rgba(255, 255, 255, 0.3);
+                    /* Added transform for hover effect */
+                    transform: scale(1.05);
                 }
 
         .container {
@@ -158,13 +161,34 @@
             font-size: 1.2em;
             color: #3498db;
             margin-bottom: 10px;
+            /* Added transition for hover effect */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            padding: 10px 15px; /* Added padding for better hover area */
+            border-radius: 8px; /* Rounded corners for hover effect */
+            background-color: rgba(0, 0, 0, 0.02); /* Very subtle background */
         }
 
-            .skills li i {
-                margin-right: 15px;
-                font-size: 1.8em;
-                color: #3498db;
+            .skills li:hover {
+                transform: translateY(-5px) scale(1.02); /* Lift and slightly scale */
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow */
+                background-color: rgba(0, 0, 0, 0.05); /* Slightly darker background on hover */
             }
+
+        .dark-mode .skills li {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+            .dark-mode .skills li:hover {
+                box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+                background-color: rgba(255, 255, 255, 0.08);
+            }
+
+
+        .skills li i {
+            margin-right: 15px;
+            font-size: 1.8em;
+            color: #3498db;
+        }
 
         .portfolio {
             display: grid;
@@ -391,6 +415,17 @@
                 color: #9400d3;
             }
         }
+
+        /* New styles for contact links hover effect */
+        #contact p a {
+            transition: color 0.3s ease, transform 0.3s ease;
+            display: inline-block; /* Required for transform to work */
+        }
+
+            #contact p a:hover {
+                transform: scale(1.05);
+                filter: brightness(1.2); /* Make it slightly brighter on hover */
+            }
     </style>
 </head>
 <body>
@@ -410,7 +445,7 @@
         <section id="about" data-aos="fade-up">
             <h2 data-en="About My Journey" data-bn="আমার যাত্রা সম্পর্কে">About Me</h2>
             <p data-en="Driven by a passion for visual storytelling and the innovative power of technology. I thrive on creating engaging experiences and bringing ideas to life through design and code."
-               data-bn="দৃশ্যমান গল্প বলা এবং প্রযুক্তির উদ্ভাবনী শক্তির প্রতি প্রবল আগ্রহ নিয়ে চালিত। আমি আকর্ষণীয় অভিজ্ঞতা তৈরি করতে এবং ডিজাইন ও কোডের মাধ্যমে ধারণাগুলিকে জীবন্ত করতে উন্নতি লাভ করি।">
+               data-bn="দৃশ্যমান গল্প বলা এবং প্রযুক্তির উদ্ভাবনী শক্তির প্রতি প্রবল আগ্রহ নিয়ে চালit। আমি আকর্ষণীয় অভিজ্ঞতা তৈরি করতে এবং ডিজাইন ও কোডের মাধ্যমে ধারণাগুলিকে জীবন্ত করতে উন্নতি লাভ করি।">
                 Driven by a passion for visual storytelling and the innovative power of technology. I thrive on creating engaging experiences and bringing ideas to life through design and code.
             </p>
         </section>
@@ -462,7 +497,7 @@
             </article>
             <article>
                 <h3 style="color:#3498db;"><span data-en="Second Entry: Design Principles" data-bn="দ্বিতীয় প্রবিষ্টি: ডিজাইনের মূলনীতি">Second Entry: Design Principles</span></h3>
-                <p data-en=" আলোচনা করছি ডিজাইনের কিছু গুরুত্বপূর্ণ মূলনীতি নিয়ে।" data-bn="Discussing some important design principles.">Discussing some important design principles.</p>
+                <p data-en=" আলোচনা করছি ডিজাইনের কিছু গুরুত্বপূর্ণ মূলনীতি নিয়ে." data-bn="Discussing some important design principles.">Discussing some important design principles.</p>
             </article>
             <article>
                 <h3 style="color:#9b59b6;"><span data-en="Third Entry: Coding Challenges" data-bn="তৃতীয় প্রবিষ্টি: কোডিং চ্যালেঞ্জ">Third Entry: Coding Challenges</span></h3>
@@ -494,7 +529,7 @@
                 <i class="fab fa-facebook"></i>
                 <a href="https://www.facebook.com/kajol.hasan/" style="color: #3b5998;" target="_blank">kajol.hasan</a>
             </p>
-            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbzL9J-T7xRjMSpIFj9Kz9eJ9N85e5EwM9Qy7cMmKUl9PuKz9KzK/exec">
+            <form id="contactForm" method="POST" action="https://script.google.com/macros/s/AKfycbwlFt13jORujZjavVlS53MmGYpIQ6RHL7b3B0wKWjuh-JK6B1QIcn6MGh4WqpUq4xcXxQ/exec">
                 <input type="text" name="Name" placeholder="Your Name" required><br>
                 <input type="email" name="Email" placeholder="Your Email" required><br>
                 <textarea name="Message" placeholder="Message" required></textarea><br>
