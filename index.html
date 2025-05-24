@@ -38,6 +38,7 @@
         }
 
             header h1 {
+                /* Default H1 font-size from header, will be overridden by specific rainbow-wave-text for H1 */
                 font-size: 3.5em;
                 margin-bottom: 10px;
             }
@@ -382,7 +383,7 @@
             display: none;
         }
 
-        /* New styles for rainbow wave text animation */
+        /* Styles for rainbow wave text animation (general) */
         .rainbow-wave-text {
             background: linear-gradient(to right, #ff0000, #ff8000, #ffff00, #008000, #0000ff, #4b0082, #9400d3);
             background-size: 200% auto; /* Make the gradient wider than the text */
@@ -392,8 +393,24 @@
             animation: wave-animation 4s linear infinite; /* Apply wave animation */
             display: inline-block; /* Essential for background-clip to work */
             font-weight: bold; /* Make it stand out */
-            font-size: 1.2em; /* Adjust font size if needed */
+            font-size: 1.2em; /* Default font size for this class */
         }
+
+        /* Specific styles for H1 with rainbow wave text to ensure correct font size and block display */
+        header h1.rainbow-wave-text {
+            font-size: 3.5em; /* Override to keep the H1's original large size */
+            display: block; /* FORCE H1 to take its own line */
+            /* All other wave properties are inherited from .rainbow-wave-text */
+        }
+
+        /* Specific styles for the P tag with rainbow wave text in the header */
+        header p.rainbow-wave-text {
+            font-size: 1.8em; /* Increased font size for better visibility */
+            white-space: normal; /* Allow text to wrap if it's too long */
+            margin-top: 10px; /* Add some space below the H1 */
+            display: block; /* FORCE P to take its own line */
+        }
+
 
         @keyframes wave-animation {
             0% {
@@ -460,7 +477,7 @@
             <button onclick="setLanguage('bn')">বাংলা</button>
         </div>
         <img src="images/profile-pic.jpg" alt="Kajol Hasan" width="120" style="border-radius: 50%; border: 3px solid #fff;" />
-        <h1 style="color:#008000; font-family: 'Roboto', sans-serif;">Kajol Hasan</h1>
+        <h1 class="rainbow-wave-text">Kajol Hasan</h1>
         <p class="rainbow-wave-text" id="typingText" data-en="Exploring the intersection of creativity and technology" data-bn="সৃজনশীলতা এবং প্রযুক্তির সংযোগস্থলে অন্বেষণ করছি...">Exploring the intersection of creativity and technology</p>
     </header>
 
@@ -474,7 +491,7 @@
             </p>
         </section>
 
-        <section id="skills" class="skills" data-aos="fade-up">
+        <section id="skills" data-aos="fade-up">
             <h2 data-en="My Expertise" data-bn="আমার দক্ষতা">Skills</h2>
             <ul>
                 <li><i class="fas fa-palette" style="color: #f39c12;"></i> <span data-en="Creative Design" data-bn="সৃজনশীল ডিজাইন">Creative Design</span></li>
