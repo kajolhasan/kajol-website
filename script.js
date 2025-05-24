@@ -1,34 +1,42 @@
-﻿// Initialize AOS (Animate On Scroll) library
+// Initialize AOS (Animate On Scroll) library
 AOS.init();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Dark Mode Toggle
     const toggle = document.getElementById('darkModeToggle');
-    toggle.addEventListener('change', () => {
-        document.body.classList.toggle('dark-mode');
-    });
+    if (toggle) {
+        toggle.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+        });
+    }
 
     // Language Toggle Function
     function setLanguage(lang) {
         const elements = document.querySelectorAll('[data-en]');
         elements.forEach(el => {
-            el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
+            // Exclude the typingText element from language changes
+            if (el.id !== 'typingText') { // <-- This is the change
+                el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
+            }
         });
+        // The typingText itself will remain constant as per user request,
+        // so we don't need to update its textContent here.
+
+        // Update document title based on language
         if (lang === 'bn') {
             document.title = "কাজল হাসান - সৃজনশীল অভিযাত্রী";
         } else {
             document.title = "Kajol Hasan - The Creative Explorer";
         }
     }
-    // Make setLanguage globally accessible since it's called from inline HTML
     window.setLanguage = setLanguage;
 
-    // Photo Gallery Lightbox Functionality (using event delegation for efficiency)
-    const photoGallery = document.querySelector('#galleryContent .gallery'); // Target the inner gallery div
+    // Photo Gallery Lightbox Functionality
+    const photoGallery = document.querySelector('#galleryContent .gallery');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
 
-    if (photoGallery) { // Ensure the gallery element exists
+    if (photoGallery) {
         photoGallery.addEventListener('click', (e) => {
             if (e.target.tagName === 'IMG') {
                 lightboxImg.src = e.target.src;
@@ -40,17 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeLightbox() {
         document.getElementById('lightbox').style.display = 'none';
     }
-    // Make closeLightbox globally accessible since it's called from inline HTML
     window.closeLightbox = closeLightbox;
 
-    // Gallery Show/Hide Toggle
+    // Gallery Show/Hide Toggle Logic
     const toggleGalleryBtn = document.getElementById('toggleGalleryBtn');
     const galleryContent = document.getElementById('galleryContent');
 
-    if (toggleGalleryBtn && galleryContent) { // Ensure both elements exist
+    if (toggleGalleryBtn && galleryContent) {
         toggleGalleryBtn.addEventListener('click', () => {
             if (galleryContent.style.display === 'none') {
-                galleryContent.style.display = 'grid'; // Set to 'grid' to match .gallery CSS
+                galleryContent.style.display = 'grid';
                 toggleGalleryBtn.textContent = 'Hide Gallery';
             } else {
                 galleryContent.style.display = 'none';
@@ -63,14 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contactForm');
     const statusDiv = document.getElementById('status');
 
-    if (form) { // Ensure the form element exists
+    if (form) {
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Disable the submit button to prevent multiple submissions
             const submitButton = form.querySelector('button[type="submit"]');
-            submitButton.disabled = true;
-            statusDiv.textContent = 'Submitting...';
+            if (submitButton) {
+                submitButton.disabled = true;
+            }
+            if (statusDiv) {
+                statusDiv.textContent = 'Submitting...';
+                statusDiv.style.color = '#3498db';
+            }
 
             const formData = new FormData(form);
 
@@ -80,29 +91,45 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData,
                 });
 
-                // Check if the response was successful (status 200-299)
                 if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
+                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText || 'Unknown error'}`);
                 }
 
-                // Attempt to parse JSON; if not JSON, handle as plain text
                 const contentType = response.headers.get("content-type");
                 let data;
-                if (contentType && contentType.indexOf("application/json") !== -1) {
+                if (contentType && contentType.includes("application/json")) {
                     data = await response.json();
                 } else {
-                    data = { message: 'Submission successful, but no JSON response from server.', status: 'success' };
+                    const responseText = await response.text();
+                    console.warn('Received non-JSON response from Google Apps Script:', responseText);
+                    data = { message: 'Form submitted successfully (non-JSON response from server).', status: 'success' };
                 }
 
-                statusDiv.textContent = data.message;
-                if (data.status === 'success') {
-                    form.reset();
+                if (statusDiv) {
+                    if (data.status === 'success') {
+                        statusDiv.textContent = data.message || 'Message sent successfully!';
+                        statusDiv.style.color = '#2ecc71';
+                        form.reset();
+                    } else {
+                        statusDiv.textContent = data.message || 'Submission failed. Please try again.';
+                        statusDiv.style.color = '#e74c3c';
+                    }
                 }
             } catch (error) {
-                console.error('Error:', error);
-                statusDiv.textContent = 'An error occurred. Please try again.';
+                console.error('Error during form submission:', error);
+                if (statusDiv) {
+                    statusDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
+                    statusDiv.style.color = '#e74c3c';
+                }
             } finally {
-                submitButton.disabled = false;
+                if (submitButton) {
+                    submitButton.disabled = false;
+                }
+                setTimeout(() => {
+                    if (statusDiv) {
+                        statusDiv.textContent = '';
+                    }
+                }, 5000);
             }
         });
     }
