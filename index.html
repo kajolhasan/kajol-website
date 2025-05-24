@@ -6,7 +6,7 @@
     <title>Kajol Hasan - The Creative Explorer</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" xintegrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
     <style>
         /* This is your inline CSS. For larger projects, consider moving this to a separate style.css file. */
@@ -42,6 +42,9 @@
                 margin-bottom: 10px;
             }
 
+        /* The .typing class is no longer applied to the text element,
+           so these styles are effectively not in use for that specific text.
+           They are kept here in case other elements use them or for future reference. */
         .typing {
             border-right: 4px solid #eee;
             white-space: nowrap;
@@ -86,13 +89,11 @@
                 border-radius: 5px;
                 cursor: pointer;
                 font-size: 0.9em;
-                /* Added transition for hover effect */
                 transition: background-color 0.3s ease, transform 0.3s ease;
             }
 
                 #langToggle button:hover {
                     background-color: rgba(255, 255, 255, 0.3);
-                    /* Added transform for hover effect */
                     transform: scale(1.05);
                 }
 
@@ -161,17 +162,16 @@
             font-size: 1.2em;
             color: #3498db;
             margin-bottom: 10px;
-            /* Added transition for hover effect */
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            padding: 10px 15px; /* Added padding for better hover area */
-            border-radius: 8px; /* Rounded corners for hover effect */
-            background-color: rgba(0, 0, 0, 0.02); /* Very subtle background */
+            padding: 10px 15px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.02);
         }
 
             .skills li:hover {
-                transform: translateY(-5px) scale(1.02); /* Lift and slightly scale */
-                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Add shadow */
-                background-color: rgba(0, 0, 0, 0.05); /* Slightly darker background on hover */
+                transform: translateY(-5px) scale(1.02);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+                background-color: rgba(0, 0, 0, 0.05);
             }
 
         .dark-mode .skills li {
@@ -382,6 +382,30 @@
             display: none;
         }
 
+        /* New styles for rainbow wave text animation */
+        .rainbow-wave-text {
+            background: linear-gradient(to right, #ff0000, #ff8000, #ffff00, #008000, #0000ff, #4b0082, #9400d3);
+            background-size: 200% auto; /* Make the gradient wider than the text */
+            -webkit-background-clip: text; /* Clip background to text shape */
+            background-clip: text;
+            -webkit-text-fill-color: transparent; /* Make text transparent to show background */
+            animation: wave-animation 4s linear infinite; /* Apply wave animation */
+            display: inline-block; /* Essential for background-clip to work */
+            font-weight: bold; /* Make it stand out */
+            font-size: 1.2em; /* Adjust font size if needed */
+        }
+
+        @keyframes wave-animation {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 100% 50%;
+            }
+        }
+
+        /* Existing rainbow-text for phone number, kept separate */
         .rainbow-text {
             animation: rainbow-animation 4s linear infinite;
         }
@@ -437,7 +461,7 @@
         </div>
         <img src="images/profile-pic.jpg" alt="Kajol Hasan" width="120" style="border-radius: 50%; border: 3px solid #fff;" />
         <h1 style="color:#008000; font-family: 'Roboto', sans-serif;">Kajol Hasan</h1>
-        <p class="typing" id="typingText" data-en="Exploring the intersection of creativity and technology" data-bn="সৃজনশীলতা এবং প্রযুক্তির সংযোগস্থলে অন্বেষণ করছি...">Exploring the intersection of creativity and technology</p>
+        <p class="rainbow-wave-text" id="typingText" data-en="Exploring the intersection of creativity and technology" data-bn="সৃজনশীলতা এবং প্রযুক্তির সংযোগস্থলে অন্বেষণ করছি...">Exploring the intersection of creativity and technology</p>
     </header>
 
     <div class="container">
@@ -445,7 +469,7 @@
         <section id="about" data-aos="fade-up">
             <h2 data-en="About My Journey" data-bn="আমার যাত্রা সম্পর্কে">About Me</h2>
             <p data-en="Driven by a passion for visual storytelling and the innovative power of technology. I thrive on creating engaging experiences and bringing ideas to life through design and code."
-               data-bn="দৃশ্যমান গল্প বলা এবং প্রযুক্তির উদ্ভাবনী শক্তির প্রতি প্রবল আগ্রহ নিয়ে চালit। আমি আকর্ষণীয় অভিজ্ঞতা তৈরি করতে এবং ডিজাইন ও কোডের মাধ্যমে ধারণাগুলিকে জীবন্ত করতে উন্নতি লাভ করি।">
+               data-bn="দৃশ্যমান গল্প বলা এবং প্রযুক্তির উদ্ভাবনী শক্তির প্রতি প্রবল আগ্রহ নিয়ে চালিত। আমি আকর্ষণীয় অভিজ্ঞতা তৈরি করতে এবং ডিজাইন ও কোডের মাধ্যমে ধারণাগুলিকে জীবন্ত করতে উন্নতি লাভ করি।">
                 Driven by a passion for visual storytelling and the innovative power of technology. I thrive on creating engaging experiences and bringing ideas to life through design and code.
             </p>
         </section>
