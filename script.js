@@ -1,14 +1,32 @@
-﻿// Initialize AOS (Animate On Scroll) library
+// Initialize AOS (Animate On Scroll) library
 AOS.init();
 
 document.addEventListener('DOMContentLoaded', () => {
     // Dark Mode Toggle
     const toggle = document.getElementById('darkModeToggle');
     if (toggle) {
+        // Set initial state from localStorage or system preference
+        const savedDarkMode = localStorage.getItem('darkMode');
+        if (savedDarkMode === 'enabled') {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        } else if (savedDarkMode === null && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // If no preference saved, use system preference
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
         toggle.addEventListener('change', () => {
-            document.body.classList.toggle('dark-mode');
+            if (toggle.checked) {
+                document.body.classList.add('dark-mode');
+                localStorage.setItem('darkMode', 'enabled');
+            } else {
+                document.body.classList.remove('dark-mode');
+                localStorage.setItem('darkMode', 'disabled');
+            }
         });
     }
+
 
     // Language Toggle Function
     function setLanguage(lang) {
@@ -31,103 +49,212 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     window.setLanguage = setLanguage;
 
-    // Photo Gallery Lightbox Functionality
-    const photoGallery = document.querySelector('#galleryContent .gallery');
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    // Set initial language based on localStorage or default to EN
+    const savedLang = localStorage.getItem('language');
+    if (savedLang) {
+        setLanguage(savedLang);
+        document.getElementById(`lang-${savedLang}`).classList.add('active');
+        if (savedLang === 'en') {
+            document.getElementById('lang-bn').classList.remove('active');
+        } else {
+            document.getElementById('lang-en').classList.remove('active');
+        }
+    } else {
+        // Default to English if no preference is saved
+        setLanguage('en');
+        document.getElementById('lang-en').classList.add('active');
+    }
 
-    if (photoGallery) {
-        photoGallery.addEventListener('click', (e) => {
-            if (e.target.tagName === 'IMG') {
-                lightboxImg.src = e.target.src;
-                lightbox.style.display = 'flex';
-            }
+    // Language switcher event listeners
+    const langEnBtn = document.getElementById('lang-en');
+    const langBnBtn = document.getElementById('lang-bn');
+
+    if (langEnBtn) {
+        langEnBtn.addEventListener('click', () => {
+            setLanguage('en');
+            localStorage.setItem('language', 'en');
+            langEnBtn.classList.add('active');
+            langBnBtn.classList.remove('active');
         });
     }
 
-    function closeLightbox() {
-        document.getElementById('lightbox').style.display = 'none';
+    if (langBnBtn) {
+        langBnBtn.addEventListener('click', () => {
+            setLanguage('bn');
+            localStorage.setItem('language', 'bn');
+            langBnBtn.classList.add('active');
+            langEnBtn.classList.remove('active');
+        });
     }
-    window.closeLightbox = closeLightbox;
 
-    // Gallery Show/Hide Toggle Logic
-    const toggleGalleryBtn = document.getElementById('toggleGalleryBtn');
-    const galleryContent = document.getElementById('galleryContent');
 
-    if (toggleGalleryBtn && galleryContent) {
-        toggleGalleryBtn.addEventListener('click', () => {
-            if (galleryContent.style.display === 'none') {
-                galleryContent.style.display = 'grid';
-                toggleGalleryBtn.textContent = 'Hide Gallery';
+    // Typing Effect for Hero Subtitle
+    const typingTextElement = document.getElementById('typingText');
+    const sentences = [
+        typingTextElement.getAttribute('data-en'),
+        typingTextElement.getAttribute('data-bn')
+    ]; // Get both English and Bengali versions
+    let sentenceIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let currentText = '';
+    const typingSpeed = 70; // typing speed
+    const deletingSpeed = 40; // deleting speed
+    const delayBetweenSentences = 1500; // delay before typing next sentence
+
+    function type() {
+        const fullTxt = sentences[sentenceIndex];
+        if (isDeleting) {
+            currentText = fullTxt.substring(0, charIndex - 1);
+        } else {
+            currentText = fullTxt.substring(0, charIndex + 1);
+        }
+
+        typingTextElement.textContent = currentText;
+
+        let typeSpeed = typingSpeed;
+        if (isDeleting) {
+            typeSpeed /= 2; // Speed up deletion
+        }
+
+        if (!isDeleting && currentText === fullTxt) {
+            typeSpeed = delayBetweenSentences;
+            isDeleting = true;
+        } else if (isDeleting && currentText === '') {
+            isDeleting = false;
+            sentenceIndex = (sentenceIndex + 1) % sentences.length; // Loop through sentences
+            typeSpeed = 500; // Delay before starting to type next sentence
+        }
+
+        charIndex = isDeleting ? charIndex - 1 : charIndex + 1;
+
+        setTimeout(type, typeSpeed);
+    }
+
+    if (typingTextElement) {
+        // Start typing effect only if the element exists
+        // Initial call to set the first sentence based on current language
+        const currentLang = localStorage.getItem('language') || 'en';
+        if (currentLang === 'bn') {
+            sentenceIndex = 1; // Start with Bengali if it's the active language
+        } else {
+            sentenceIndex = 0; // Start with English
+        }
+        type();
+    }
+
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTopBtn');
+
+    window.addEventListener('scroll', () => {
+        if (backToTopBtn) {
+            if (window.scrollY > 300) { // Show button after scrolling down 300px
+                backToTopBtn.style.display = 'block';
             } else {
-                galleryContent.style.display = 'none';
-                toggleGalleryBtn.textContent = 'Show Gallery';
+                backToTopBtn.style.display = 'none';
             }
+        }
+    });
+
+    if (backToTopBtn) {
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            }); // Smooth scroll to top
+        });
+    }
+
+    // Current Year for Footer
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
+    }
+
+    // Mobile Menu Toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+
+    if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Close menu when a link is clicked (for smoother mobile navigation)
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
         });
     }
 
     // Contact Form Submission (Google Apps Script)
-    const form = document.getElementById('contactForm');
-    const statusDiv = document.getElementById('status');
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        const statusDiv = document.createElement('div');
+        statusDiv.className = 'form-status';
+        contactForm.insertBefore(statusDiv, contactForm.querySelector('button[type="submit"]')); // Insert before submit button
 
-    if (form) {
-        form.addEventListener('submit', async (e) => {
+        contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const submitButton = form.querySelector('button[type="submit"]');
-            if (submitButton) {
-                submitButton.disabled = true;
-            }
-            if (statusDiv) {
-                statusDiv.textContent = 'Submitting...';
-                statusDiv.style.color = '#3498db';
-            }
-
-            const formData = new FormData(form);
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            submitButton.disabled = true; // Disable button to prevent multiple submissions
+            statusDiv.textContent = 'Sending message...';
+            statusDiv.style.color = '#3498db'; // Blue for sending
 
             try {
-                const response = await fetch(form.action, {
+                const formData = new FormData(contactForm);
+                const response = await fetch(contactForm.action, {
                     method: 'POST',
                     body: formData,
+                    redirect: 'follow', // Follow redirects, important for Apps Script
+                    headers: {
+                        // Apps Script sometimes needs specific headers if CORS is strict
+                        // 'Content-Type': 'application/x-www-form-urlencoded', // FormData sets this automatically
+                        'Accept': 'application/json' // Requesting JSON response
+                    }
                 });
 
-                if (!response.ok) {
-                    throw new Error(`HTTP error! Status: ${response.status} - ${response.statusText || 'Unknown error'}`);
-                }
-
-                const contentType = response.headers.get("content-type");
                 let data;
-                if (contentType && contentType.includes("application/json")) {
+                const contentType = response.headers.get('content-type');
+                if (contentType && contentType.includes('application/json')) {
                     data = await response.json();
                 } else {
+                    // Handle cases where Apps Script returns plain text or HTML (e.g., on error)
                     const responseText = await response.text();
                     console.warn('Received non-JSON response from Google Apps Script:', responseText);
-                    data = { message: 'Form submitted successfully (non-JSON response from server).', status: 'success' };
+                    // Attempt to parse if it's stringified JSON, or assume a success for simplicity
+                    try {
+                        data = JSON.parse(responseText);
+                    } catch (parseError) {
+                        data = { message: 'Form submitted successfully (non-JSON response from server).', status: 'success' };
+                    }
                 }
 
                 if (statusDiv) {
                     if (data.status === 'success') {
                         statusDiv.textContent = data.message || 'Message sent successfully!';
-                        statusDiv.style.color = '#2ecc71';
-                        form.reset();
+                        statusDiv.style.color = '#2ecc71'; // Green for success
+                        contactForm.reset();
                     } else {
                         statusDiv.textContent = data.message || 'Submission failed. Please try again.';
-                        statusDiv.style.color = '#e74c3c';
+                        statusDiv.style.color = '#e74c3c'; // Red for error
                     }
                 }
             } catch (error) {
                 console.error('Error during form submission:', error);
                 if (statusDiv) {
                     statusDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
-                    statusDiv.style.color = '#e74c3c';
+                    statusDiv.style.color = '#e74c3c'; // Red for error
                 }
             } finally {
                 if (submitButton) {
-                    submitButton.disabled = false;
+                    submitButton.disabled = false; // Re-enable button
                 }
                 setTimeout(() => {
                     if (statusDiv) {
-                        statusDiv.textContent = '';
+                        statusDiv.textContent = ''; // Clear status message after 5 seconds
                     }
                 }, 5000);
             }
