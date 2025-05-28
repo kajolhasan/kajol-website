@@ -1,4 +1,4 @@
-// Initialize AOS (Animate On Scroll) library
+﻿// Initialize AOS (Animate On Scroll) library
 AOS.init();
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -33,18 +33,27 @@ document.addEventListener('DOMContentLoaded', () => {
         const elements = document.querySelectorAll('[data-en]');
         elements.forEach(el => {
             // Exclude the typingText element from language changes
-            if (el.id !== 'typingText') { // <-- This is the change
+            if (el.id !== 'typingText') {
                 el.textContent = lang === 'bn' ? el.getAttribute('data-bn') : el.getAttribute('data-en');
             }
         });
-        // The typingText itself will remain constant as per user request,
-        // so we don't need to update its textContent here.
 
         // Update document title based on language
         if (lang === 'bn') {
             document.title = "কাজল হাসান - সৃজনশীল অভিযাত্রী";
         } else {
             document.title = "Kajol Hasan - The Creative Explorer";
+        }
+
+        // Update the "Toggle Gallery" button text based on language
+        const toggleGalleryBtn = document.getElementById('toggleGalleryBtn');
+        const galleryGrid = document.querySelector('.gallery-grid');
+        if (toggleGalleryBtn && galleryGrid) {
+            if (galleryGrid.classList.contains('hidden')) {
+                toggleGalleryBtn.textContent = lang === 'bn' ? 'গ্যালারি দেখান' : 'Show Gallery';
+            } else {
+                toggleGalleryBtn.textContent = lang === 'bn' ? 'গ্যালারি লুকান' : 'Hide Gallery';
+            }
         }
     }
     window.setLanguage = setLanguage;
@@ -166,12 +175,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Current Year for Footer
-    const currentYearSpan = document.getElementById('currentYear');
-    if (currentYearSpan) {
-        currentYearSpan.textContent = new Date().getFullYear();
-    }
-
     // Mobile Menu Toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navLinks = document.querySelector('.nav-links');
@@ -189,8 +192,107 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Smooth Scrolling for Nav Links
+    document.querySelectorAll('.nav-links a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            navLinks.classList.remove('active'); // Close mobile menu after click
+
+            const targetId = this.getAttribute('href').substring(1);
+            const targetElement = document.getElementById(targetId);
+
+            if (targetElement) {
+                // Get the height of the fixed navbar
+                const navbarHeight = document.querySelector('.navbar').offsetHeight;
+
+                // Calculate the position to scroll to
+                // Subtract navbarHeight to account for the fixed navbar
+                const elementPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - navbarHeight;
+
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Highlight active nav link on scroll
+    const sections = document.querySelectorAll('section');
+    const navLi = document.querySelectorAll('.nav-links li a');
+
+    function highlightNavLink() {
+        let current = '';
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - document.querySelector('.navbar').offsetHeight; // Adjust for navbar height
+            if (scrollY >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        });
+
+        navLi.forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href').includes(current)) {
+                a.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightNavLink);
+    highlightNavLink(); // Call on load to set initial active link
+
+    // Photo Gallery Lightbox Functionality
+    const galleryImages = document.querySelectorAll('.gallery-grid img');
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-btn');
+
+    galleryImages.forEach(image => {
+        image.addEventListener('click', () => {
+            lightbox.classList.add('active');
+            lightboxImg.src = image.src;
+        });
+    });
+
+    closeBtn.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+    });
+
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    // Close lightbox with Escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && lightbox.classList.contains('active')) {
+            lightbox.classList.remove('active');
+        }
+    });
+
+    // Photo Gallery Show/Hide Option
+    const toggleGalleryBtn = document.getElementById('toggleGalleryBtn');
+    const galleryGrid = document.querySelector('.gallery-grid');
+
+    if (toggleGalleryBtn && galleryGrid) {
+        toggleGalleryBtn.addEventListener('click', () => {
+            galleryGrid.classList.toggle('hidden');
+            const currentLang = localStorage.getItem('language') || 'en'; // Get current language
+            if (galleryGrid.classList.contains('hidden')) {
+                toggleGalleryBtn.textContent = currentLang === 'bn' ? 'গ্যালারি দেখান' : 'Show Gallery';
+            } else {
+                toggleGalleryBtn.textContent = currentLang === 'bn' ? 'গ্যালারি লুকান' : 'Hide Gallery';
+            }
+        });
+    }
+
+
     // Contact Form Submission (Google Apps Script)
-    const contactForm = document.querySelector('.contact-form');
+    const contactForm = document.querySelector('#contact form');
     if (contactForm) {
         const statusDiv = document.createElement('div');
         statusDiv.className = 'form-status';
@@ -200,8 +302,15 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const submitButton = contactForm.querySelector('button[type="submit"]');
             submitButton.disabled = true; // Disable button to prevent multiple submissions
+
+            // Determine text color based on dark mode
+            const isDarkMode = document.body.classList.contains('dark-mode');
+            const defaultTextColor = isDarkMode ? '#fff' : '#3498db'; // White in dark mode, blue in light mode
+            const successTextColor = isDarkMode ? '#90ee90' : '#2ecc71'; // Light green in dark mode, green in light mode
+            const errorTextColor = isDarkMode ? '#ff6347' : '#e74c3c'; // Tomato in dark mode, red in light mode
+
             statusDiv.textContent = 'Sending message...';
-            statusDiv.style.color = '#3498db'; // Blue for sending
+            statusDiv.style.color = defaultTextColor; // Set initial color
 
             try {
                 const formData = new FormData(contactForm);
@@ -210,8 +319,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     body: formData,
                     redirect: 'follow', // Follow redirects, important for Apps Script
                     headers: {
-                        // Apps Script sometimes needs specific headers if CORS is strict
-                        // 'Content-Type': 'application/x-www-form-urlencoded', // FormData sets this automatically
                         'Accept': 'application/json' // Requesting JSON response
                     }
                 });
@@ -235,22 +342,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (statusDiv) {
                     if (data.status === 'success') {
                         statusDiv.textContent = data.message || 'Message sent successfully!';
-                        statusDiv.style.color = '#2ecc71'; // Green for success
+                        statusDiv.style.color = successTextColor; // Set success color
                         contactForm.reset();
                     } else {
                         statusDiv.textContent = data.message || 'Submission failed. Please try again.';
-                        statusDiv.style.color = '#e74c3c'; // Red for error
+                        statusDiv.style.color = errorTextColor; // Set error color
                     }
                 }
             } catch (error) {
                 console.error('Error during form submission:', error);
                 if (statusDiv) {
                     statusDiv.textContent = `An error occurred: ${error.message}. Please try again.`;
-                    statusDiv.style.color = '#e74c3c'; // Red for error
+                    statusDiv.style.color = errorTextColor; // Set error color
                 }
             } finally {
                 if (submitButton) {
-                    submitButton.disabled = false; // Re-enable button
+                    submitButton.disabled = false;
                 }
                 setTimeout(() => {
                     if (statusDiv) {
@@ -259,5 +366,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 5000);
             }
         });
+    }
+
+    // Current Year for Footer
+    const currentYearSpan = document.getElementById('currentYear');
+    if (currentYearSpan) {
+        currentYearSpan.textContent = new Date().getFullYear();
     }
 });
