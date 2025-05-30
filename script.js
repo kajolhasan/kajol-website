@@ -1,4 +1,4 @@
-// Initialize AOS (Animate On Scroll) library
+﻿// Initialize AOS (Animate On Scroll) library
 AOS.init();
 
 document.addEventListener('DOMContentLoaded', () => {
