@@ -1,4 +1,4 @@
-﻿/* General Resets & Box-sizing */
+/* General Resets & Box-sizing */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -537,17 +537,13 @@ section p {
     border-color: #444;
 }
 
-.portfolio-item img, .movie-item img { /* Combined image styles */
+.portfolio-item img { /* Specific height for portfolio images */
     width: 100%;
     height: 220px; /* Consistent image height */
     object-fit: cover;
     border-radius: 5px;
     margin-bottom: 15px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-}
-
-.movie-item img { /* Specific height for movie thumbnails */
-    height: 180px;
 }
 
 .portfolio-item h3, .movie-item h3 { /* Combined h3 styles */
@@ -565,11 +561,81 @@ section p {
     flex-grow: 1; /* Allow description to take up available space */
 }
 
-.movie-item .button-secondary { /* Specific style for movie item button */
-    margin-top: 15px; /* Space above the button */
-    align-self: flex-start; /* Align button to the start */
+/* Responsive Video Embeds */
+.movie-item {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width = 9 / 16 = 0.5625) */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+    background: #000; /* Fallback background */
+    border-radius: 8px; /* Match your existing styling */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); /* Match existing shadow */
+    display: flex; /* Override previous flex-direction column */
+    flex-direction: column; /* Re-add flex-direction for content below video */
+    justify-content: flex-start; /* Align content to top */
+    align-items: stretch; /* Stretch content to fill width */
+    padding: 0; /* Remove padding from .movie-item itself */
 }
 
+    .movie-item iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border: 0;
+    }
+
+    /* Adjust .movie-item for the title and paragraph below the video */
+    .movie-item h3,
+    .movie-item p {
+        position: relative; /* Make text flow normally below the iframe */
+        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for text */
+        color: #fff;
+        font-size: 0.9em;
+        text-align: center;
+        margin: 0; /* Remove default paragraph margin */
+        padding: 10px; /* Add padding to text */
+        box-sizing: border-box; /* Include padding in width calculation */
+        z-index: 1; /* Ensure text is above iframe if any overlap */
+        width: 100%; /* Take full width */
+    }
+
+    .movie-item h3 {
+        padding-top: 15px; /* More padding for the title */
+        font-size: 1.2em; /* Adjust title size */
+        background-color: rgba(0, 0, 0, 0.8); /* Slightly darker for title background */
+    }
+
+    .movie-item p {
+        padding-bottom: 15px; /* More padding for the description */
+        font-size: 0.9em;
+        line-height: 1.4;
+    }
+
+/* Dark mode adjustments for movie titles and descriptions */
+.dark-mode .movie-item h3,
+.dark-mode .movie-item p {
+    background-color: rgba(255, 255, 255, 0.1); /* Lighter transparent background in dark mode */
+    color: #fff !important; /* Ensure text is white */
+}
+
+.dark-mode .movie-item h3 {
+    background-color: rgba(255, 255, 255, 0.15); /* Slightly darker for title background in dark mode */
+}
+
+.movie-item .button-secondary { /* Specific style for movie item button */
+    margin-top: auto; /* Push button to the bottom */
+    align-self: center; /* Center the button within the movie item */
+    width: fit-content; /* Adjust width to content */
+    padding: 8px 15px; /* Smaller padding for button */
+    font-size: 0.8em; /* Smaller font size */
+    border-radius: 5px;
+    position: relative; /* Allow z-index to work */
+    z-index: 2; /* Ensure button is above iframe and text */
+    margin-bottom: 10px; /* Space below button */
+}
 
 .portfolio-item:hover, .movie-item:hover { /* Combined hover styles */
     transform: translateY(-8px);
@@ -793,7 +859,7 @@ footer p {
 }
 
 .dark-mode .dark-mode-toggle-container {
-    background-color: rgba(255, 255, 255, 0.1); /* Adjusted for black background */
+    background-color: rgba(0, 0, 0, 0.1); /* Adjusted for black background */
 }
 
 .dark-mode-switch {
@@ -918,6 +984,73 @@ input:checked + .slider {
     .dark-mode .close-btn:focus {
         color: #f08080; /* Dark mode accent color */
     }
+
+
+/* Mini Game Section */
+#mini-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 60px 20px;
+    margin-bottom: 60px;
+    background-color: #f8f8f8; /* Light background for game section */
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode #mini-game {
+    background-color: #1a1a1a; /* Dark background for game section */
+}
+
+.game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 480px; /* Max width for consistency */
+    margin-top: 20px;
+}
+
+#breakoutCanvas {
+    background-color: #eee;
+    display: block;
+    margin: 0 auto; /* Center the canvas horizontally */
+    border: 2px solid #333;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 100%; /* Make canvas responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.dark-mode #breakoutCanvas {
+    background-color: #333;
+    border-color: #666;
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
+}
+
+.game-controls {
+    display: flex;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+#mini-game .button-primary,
+#mini-game .button-secondary {
+    margin-top: 0; /* Remove extra margin */
+    margin-bottom: 0; /* Remove extra margin */
+}
+
+.game-status-message { /* Updated class name */
+    margin-top: 15px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #e74c3c; /* Default status color */
+}
+
+.dark-mode .game-status-message { /* Updated class name */
+    color: #f08080 !important; /* Lighter accent for dark mode */
+}
 
 
 /* Responsive Adjustments */
