@@ -186,29 +186,36 @@ body {
         }
 
 /* Specific colors for social icons in dark mode */
-.dark-mode .nav-social a.fa-instagram {
-    color: #E4405F !important; /* Instagram Pink/Red */
+/* These rules ensure the icons retain their brand colors in dark mode */
+.footer-social a .fa-facebook {
+    color: #1877F2 !important; /* Facebook Blue */
 }
 
-.dark-mode .nav-social a.fa-envelope {
-    color: #EA4335 !important; /* Gmail Red */
+.footer-social a .fa-instagram {
+    color: #E4405F !important; /* Instagram Red-Pink */
 }
 
-.dark-mode .nav-social a.fa-telegram-plane,
-.dark-mode .nav-social a.fa-telegram { /* Added fa-telegram for broader compatibility */
-    color: #229ED9 !important; /* Telegram Blue */
+.footer-social a .fa-linkedin {
+    color: #0A66C2 !important; /* LinkedIn Blue */
 }
 
-.dark-mode .nav-social a.fa-facebook-f,
-.dark-mode .nav-social a.fa-facebook-square,
-.dark-mode .nav-social a.fa-facebook { /* Added fa-facebook-square and fa-facebook for broader compatibility */
-    color: #3b5998 !important; /* Facebook Blue */
+/* If you have a Telegram icon */
+.contact-details p .fa-telegram,
+.footer-social a .fa-telegram { /* Targeting both contact and footer if applicable */
+    color: #0088CC !important; /* Telegram Blue */
+}
+
+/* If you have a Gmail/Envelope icon (assuming fas fa-envelope) */
+.contact-details p .fa-envelope,
+.footer-social a .fa-envelope { /* Targeting both contact and footer if applicable */
+    color: #EA4335 !important; /* Gmail Red (common for Google services) */
 }
 
 /* Ensure other social icons remain white in dark mode unless specified */
 .dark-mode .nav-social a:not(.fa-facebook-f):not(.fa-facebook-square):not(.fa-facebook):not(.fa-telegram-plane):not(.fa-telegram):not(.fa-instagram):not(.fa-envelope) {
     color: #fff !important;
 }
+
 
 .language-switcher {
     margin-left: 20px;
@@ -524,8 +531,8 @@ section p {
         text-align: left;
         transition: transform 0.3s ease-in-out, box-shadow 0.3s ease;
         background-color: #fff;
-        display: flex; /* Added flex to movie-item for better layout */
-        flex-direction: column; /* Added flex-direction to movie-item */
+        /* Removed flex properties that were causing issues for movie-item here,
+           they are now defined specifically for movie-item below if needed */
     }
 
 /* Dark mode for portfolio, blog, movie items */
@@ -558,89 +565,69 @@ section p {
     font-size: 1em;
     color: #666;
     margin-bottom: 0; /* Remove extra margin */
-    flex-grow: 1; /* Allow description to take up available space */
+    /* Removed flex-grow from here as it's better handled within movie-item specific styles */
 }
 
-/* Responsive Video Embeds */
+/* --- Movie Item Specific Styles (Adjusted for Image-based content) --- */
 .movie-item {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio (height / width = 9 / 16 = 0.5625) */
-    height: 0;
-    overflow: hidden;
-    max-width: 100%;
-    background: #000; /* Fallback background */
-    border-radius: 8px; /* Match your existing styling */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); /* Match existing shadow */
-    display: flex; /* Override previous flex-direction column */
-    flex-direction: column; /* Re-add flex-direction for content below video */
-    justify-content: flex-start; /* Align content to top */
-    align-items: stretch; /* Stretch content to fill width */
-    padding: 0; /* Remove padding from .movie-item itself */
+    display: flex; /* Use flexbox for vertical layout */
+    flex-direction: column; /* Stack image, text, button vertically */
+    justify-content: space-between; /* Distribute space between content and push button to bottom */
+    align-items: center; /* Center items horizontally */
+    text-align: center; /* Center text within movie item */
+    padding: 25px; /* Keep padding */
+    border: 1px solid #eee; /* Keep border */
+    border-radius: 8px; /* Keep border-radius */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03); /* Keep shadow */
+    background-color: #fff; /* Keep background */
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease; /* Keep transitions */
+    height: auto; /* Allow height to adjust to content */
+    position: relative; /* Needed for hover effects */
+    overflow: visible; /* Ensure content is not hidden */
+    padding-bottom: 25px; /* Ensure space for button at the bottom */
 }
 
-    .movie-item iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
+    .movie-item img {
         width: 100%;
-        height: 100%;
-        border: 0;
-    }
-
-    /* Adjust .movie-item for the title and paragraph below the video */
-    .movie-item h3,
-    .movie-item p {
-        position: relative; /* Make text flow normally below the iframe */
-        background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background for text */
-        color: #fff;
-        font-size: 0.9em;
-        text-align: center;
-        margin: 0; /* Remove default paragraph margin */
-        padding: 10px; /* Add padding to text */
-        box-sizing: border-box; /* Include padding in width calculation */
-        z-index: 1; /* Ensure text is above iframe if any overlap */
-        width: 100%; /* Take full width */
+        height: 200px; /* Set a consistent height for movie thumbnails */
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 15px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     }
 
     .movie-item h3 {
-        padding-top: 15px; /* More padding for the title */
-        font-size: 1.2em; /* Adjust title size */
-        background-color: rgba(0, 0, 0, 0.8); /* Slightly darker for title background */
+        margin-top: 0;
+        margin-bottom: 10px;
+        font-size: 1.6em; /* Slightly smaller title for movie items */
+        color: #333;
     }
 
     .movie-item p {
-        padding-bottom: 15px; /* More padding for the description */
-        font-size: 0.9em;
-        line-height: 1.4;
+        font-size: 0.95em;
+        line-height: 1.5;
+        color: #666;
+        margin-bottom: 15px; /* Space before the button */
+        flex-grow: 1; /* Allow description to take available space */
     }
 
-/* Dark mode adjustments for movie titles and descriptions */
-.dark-mode .movie-item h3,
-.dark-mode .movie-item p {
-    background-color: rgba(255, 255, 255, 0.1); /* Lighter transparent background in dark mode */
-    color: #fff !important; /* Ensure text is white */
-}
+    .movie-item .button-secondary { /* Specific style for movie item button */
+        margin-top: auto; /* Push button to the bottom */
+        align-self: center; /* Center the button within the movie item */
+        width: fit-content; /* Adjust width to content */
+        padding: 10px 20px; /* Adjust padding for button */
+        font-size: 0.9em; /* Adjust font size */
+        border-radius: 5px;
+        position: relative; /* Allow z-index to work */
+        z-index: 2; /* Ensure button is above other elements if needed */
+        margin-bottom: 0; /* Remove extra margin */
+    }
 
-.dark-mode .movie-item h3 {
-    background-color: rgba(255, 255, 255, 0.15); /* Slightly darker for title background in dark mode */
-}
 
-.movie-item .button-secondary { /* Specific style for movie item button */
-    margin-top: auto; /* Push button to the bottom */
-    align-self: center; /* Center the button within the movie item */
-    width: fit-content; /* Adjust width to content */
-    padding: 8px 15px; /* Smaller padding for button */
-    font-size: 0.8em; /* Smaller font size */
-    border-radius: 5px;
-    position: relative; /* Allow z-index to work */
-    z-index: 2; /* Ensure button is above iframe and text */
-    margin-bottom: 10px; /* Space below button */
-}
-
-.portfolio-item:hover, .movie-item:hover { /* Combined hover styles */
-    transform: translateY(-8px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
+    .portfolio-item:hover, .movie-item:hover { /* Combined hover styles */
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    }
 
 /* Gallery Grid */
 .gallery-grid {
@@ -768,6 +755,66 @@ section p {
             transition: color 0.3s ease;
             position: relative;
         }
+
+/* Contact Form Specific Styles */
+.contact-form {
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack elements vertically */
+    gap: 15px; /* Space between form elements */
+    max-width: 500px; /* Limit form width for better readability */
+    margin: 0 auto; /* Center the form */
+    padding: 20px; /* Add some padding inside the form area */
+    border-radius: 8px; /* Rounded corners for the form */
+    background-color: #f0f0f0; /* Light background for the form area */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+}
+
+.dark-mode .contact-form {
+    background-color: #1a1a1a; /* Dark background for form in dark mode */
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.1);
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea {
+    width: 100%; /* Full width within the form */
+    padding: 12px; /* Comfortable padding */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 5px; /* Rounded corners */
+    font-size: 1em;
+    font-family: 'Montserrat', sans-serif;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+    .contact-form input[type="text"]:focus,
+    .contact-form input[type="email"]:focus,
+    .contact-form textarea:focus {
+        border-color: #e74c3c; /* Accent color on focus */
+        box-shadow: 0 0 8px rgba(231, 76, 60, 0.3); /* Subtle glow on focus */
+        outline: none; /* Remove default outline */
+    }
+
+.dark-mode .contact-form input[type="text"],
+.dark-mode .contact-form input[type="email"],
+.dark-mode .contact-form textarea {
+    background-color: #333; /* Darker background for inputs in dark mode */
+    border-color: #666; /* Lighter border in dark mode */
+    color: #fff; /* White text in dark mode */
+}
+
+    .dark-mode .contact-form input[type="text"]::placeholder,
+    .dark-mode .contact-form input[type="email"]::placeholder,
+    .dark-mode .contact-form textarea::placeholder {
+        color: #bbb; /* Lighter placeholder text in dark mode */
+    }
+
+.contact-form button[type="submit"] {
+    width: 100%; /* Make the submit button full width */
+    padding: 15px; /* Larger padding for the button */
+    font-size: 1.1em;
+    margin-top: 10px; /* Space above the button */
+}
+
 
 /* Footer */
 footer {
@@ -1003,12 +1050,36 @@ input:checked + .slider {
     background-color: #1a1a1a; /* Dark background for game section */
 }
 
-.game-container {
+/* Style for the container specifically holding the embedded game (Hook Arcade) */
+.game-embed-container {
+    width: 100%; /* Ensure the container itself can expand */
+    max-width: 800px; /* Match the desired iframe width */
+    margin-top: 20px;
+    /* Optional: Add a border or background to the container if desired */
+    /* border: 1px solid #ddd; */
+    /* border-radius: 8px; */
+    /* overflow: hidden; /* Ensures iframe corners match container */
+}
+
+    /* Specific styling for the embedded game iframe (Hook Arcade) */
+    .game-embed-container iframe {
+        width: 800px; /* Set a fixed width for desktop */
+        height: 600px; /* Set a fixed height for desktop */
+        max-width: 100%; /* Ensures it scales down on smaller screens */
+        min-width: 320px; /* Minimum width to prevent it from becoming too small */
+        min-height: 240px; /* Ensure a minimum height */
+        display: block; /* Helps with centering and sizing */
+        margin: 0 auto; /* To center it */
+        border: 1px solid var(--border-color, #ccc); /* Use CSS variable for dark mode compatibility */
+    }
+
+
+.game-container { /* This section is likely for your Breakout Canvas */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    max-width: 480px; /* Max width for consistency */
+    max-width: 480px; /* Max width for consistency of your Breakout canvas */
     margin-top: 20px;
 }
 
@@ -1160,6 +1231,17 @@ input:checked + .slider {
     .portfolio-grid, .gallery-grid, .blog-grid, .movie-grid { /* Added .movie-grid here */
         grid-template-columns: 1fr; /* Single column layout */
     }
+
+    /* Adjustments for the embedded game iframe on smaller screens */
+    @media (max-width: 820px) { /* Changed from 768px to ensure 800px iframe also scales down */
+        #mini-game .game-embed-container iframe {
+            width: 100%; /* Make it take full width of its container on smaller screens */
+            /* Height will be proportionally calculated by the browser based on 16:9 for this iframe */
+            height: calc(100vw * 0.75); /* Approximately 4:3 aspect ratio (600/800 = 0.75) relative to viewport width */
+            /* You can adjust the 0.75 value if the game's actual aspect ratio is different */
+        }
+    }
+
 
     .contact-form {
         padding: 20px;

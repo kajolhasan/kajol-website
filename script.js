@@ -668,7 +668,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Initial draw to show game elements before starting
-        draw();
+        initBricks(); // <-- ADDED THIS LINE
+        draw(); // This line was already here
     } else {
         console.error("Canvas element for mini-game not found. Game not initialized.");
     }
